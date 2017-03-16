@@ -14,11 +14,13 @@
     position: relative;
   }
   app-side-bar {
-    float: left;
     height: 100%;
   }
   .list-box {
-    float: left;
+    position: absolute;
+    left: 3rem;
+    top: 0;
     height: 100%;
+    width: 100%;
   }
 }

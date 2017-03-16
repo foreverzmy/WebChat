@@ -8,6 +8,7 @@ import { HomeComponent } from './home.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { BuddyListComponent } from './buddy-list/buddy-list.component';
 import { GroupListComponent } from './group-list/group-list.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
 
 @NgModule({
   imports: [
@@ -20,12 +21,14 @@ import { GroupListComponent } from './group-list/group-list.component';
     SideBarComponent,
     BuddyListComponent,
     GroupListComponent,
+    ChatRoomComponent,
   ],
   exports: [
     HomeComponent,
     SideBarComponent,
     BuddyListComponent,
-    GroupListComponent
+    GroupListComponent,
+    ChatRoomComponent,
   ]
 })
 export class HomeModule { }

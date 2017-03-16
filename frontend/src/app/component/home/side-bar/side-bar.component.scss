@@ -1,10 +1,14 @@
 #sideBar {
   background-color: #00BCD4;
-  width: 2rem;
+  width: 3rem;
   text-align: center;
   height: 100%;
   padding-top: 2rem;
-  i {
-    width: 2rem;
+  a {
+    display: block;
+    padding: .4rem 0;
+    i {
+      width: 2rem;
+    }
   }
 }
