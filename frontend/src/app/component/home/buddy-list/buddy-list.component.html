@@ -1,0 +1,18 @@
+<div class="container">
+  <md-list>
+    <h3 md-subheader>Folders</h3>
+    <md-list-item>
+      <md-icon md-list-avatar>folder</md-icon>
+      <h4 md-line>sss</h4>
+      <p md-line>aaaa </p>
+    </md-list-item>
+    <md-divider></md-divider>
+    <h3 md-subheader>Notes</h3>
+    <md-list-item *ngFor="let note of notes">
+      <md-icon md-list-avatar>note</md-icon>
+      <h4 md-line>{{note.name}}</h4>
+      <p md-line> {{note.updated | date}} </p>
+    </md-list-item>
+    <md-divider></md-divider>
+  </md-list>
+</div>

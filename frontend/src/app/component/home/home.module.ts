@@ -6,7 +6,7 @@ import { MaterialModule } from '@angular/material';
 
 import { HomeComponent } from './home.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
-import { ListComponent } from './list/list.component';
+import { BuddyListComponent } from './buddy-list/buddy-list.component';
 import { GroupListComponent } from './group-list/group-list.component';
 
 @NgModule({
@@ -18,13 +18,13 @@ import { GroupListComponent } from './group-list/group-list.component';
   declarations: [
     HomeComponent,
     SideBarComponent,
-    ListComponent,
+    BuddyListComponent,
     GroupListComponent,
   ],
   exports: [
     HomeComponent,
     SideBarComponent,
-    ListComponent,
+    BuddyListComponent,
     GroupListComponent
   ]
 })
