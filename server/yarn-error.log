@@ -1,0 +1,67 @@
+Arguments: 
+  D:\Node\node.exe D:\yarn\bin\yarn.js
+
+PATH: 
+  C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Redis\;D:\yarn\bin;C:\Program Files\Git\cmd;D:\Node\;D:\JAVA\jdk1.8.0_121\bin;D:\JAVA\jdk1.8.0_121\jre\bin;C:\Program Files\ConEmu;D:\nginx-1.11.6;C:\Program Files\MongoDB\Server\3.4\bin;C:\Users\hzzmy\AppData\Local\Yarn\.bin;D:\Microsoft VS Code\bin;C:\Users\hzzmy\AppData\Roaming\npm;
+
+Yarn version: 
+  0.18.1
+
+Node version: 
+  7.7.1
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "webchat",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+      "test": "ava",
+      "start": "pm2 start ./bin/run",
+      "startlow": "node --harmony-async-await ./server/bin/run",
+      "restart": "npm run build & node --harmony-async-await ./server/bin/run",
+      "build": "cd client & ng build"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "ava": "^0.18.2",
+      "bcryptjs": "^2.4.3",
+      "chai": "^3.5.0",
+      "debug": "^2.6.0",
+      "jsonwebtoken": "^7.3.0",
+      "koa": "^2.0.0-alpha.8",
+      "koa-bodyparser": "^2.3.0",
+      "koa-convert": "^1.2.0",
+      "koa-favicon": "^1.2.1",
+      "koa-jwt": "^2.2.2",
+      "koa-router": "^7.0.1",
+      "koa-session": "^3.4.0",
+      "koa-static": "^2.1.0",
+      "koa2-cors": "^2.0.3",
+      "mongoose": "^4.8.1",
+      "sha256": "^0.2.0",
+      "socket.io": "^1.7.2"
+    },
+    "devDependencies": {
+      "babel-eslint": "^6.1.2",
+      "eslint": "^3.16.1",
+      "eslint-config-google": "^0.7.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: connect ETIMEDOUT 104.16.62.173:443
+      at Object.exports._errnoException (util.js:1029:11)
+      at exports._exceptionWithHostPort (util.js:1052:20)
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1093:14)

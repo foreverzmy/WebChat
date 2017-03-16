@@ -1,0 +1,21 @@
+<form fxFlex="100" (ngSubmit)="register()" #registerForm="ngForm">
+  <md-card class="register-card" fxFlex='80' fxFlexOffset='10' fxFlex.gt-md='50' fxFlexOffset.gt-md='25'>
+    <md-card-header class="title">
+      <md-card-title>注册</md-card-title>
+      <!--<md-card-subtitle>Dog Breed</md-card-subtitle>-->
+    </md-card-header>
+    <md-card-content>
+      <md-input-container class="input-width">
+        <input mdInput type="email" name="email" [(ngModel)]="registerCredentials.email" placeholder="邮箱" required>
+      </md-input-container>
+
+      <md-input-container class="input-width">
+        <input mdInput type="password" name="password" [(ngModel)]="registerCredentials.password" placeholder="密码" required>
+      </md-input-container>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button type="submit">register</button>
+    </md-card-actions>
+  </md-card>
+
+</form>

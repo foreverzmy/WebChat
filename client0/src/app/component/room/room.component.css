@@ -1,0 +1,34 @@
+.out-card {
+  position: relative;
+  width: 450px;
+  height: 730px;
+}
+
+.msg-container {
+  height: 700px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.msg-card {
+  width: 400px;
+}
+
+.avatar {
+  background-image: url('favicon.ico');
+  background-size: cover;
+}
+
+.full-width {
+  width: 360px;
+  margin-left: 15px;
+}
+
+.send-card {
+  position: absolute;
+  bottom: 15px;
+}
+
+textarea {
+  overflow-y: visible;
+}

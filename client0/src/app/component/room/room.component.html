@@ -1,0 +1,22 @@
+<md-card class="out-card">
+  <md-card-content class="msg-container" #msgContainer appAutoScrollToBottom>
+    <md-card class="msg-card" *ngFor="let message of messages">
+      <md-card-header>
+        <div md-card-avatar class="avatar"></div>
+        <md-card-title>whoever</md-card-title>
+        <md-card-subtitle>18:06</md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <p> {{message}} </p>
+      </md-card-content>
+    </md-card>
+  </md-card-content>
+  <md-card-actions class="send-card">
+    <form class="message-creator">
+      <md-input-container class="full-width">
+        <textarea md-input name="newMessage" [(ngModel)]="newMessage" appCtrlEnterBreakLine (keyup.enter)="createMessage()" placeholder="Say..."></textarea>
+      </md-input-container>
+      <button md-button (click)="createMessage()">SEND</button>
+    </form>
+  </md-card-actions>
+</md-card>
