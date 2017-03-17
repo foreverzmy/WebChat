@@ -1,4 +1,32 @@
 .container {
   width: 100%;
-  background-color: red;
+  height: 100%;
+  padding: 0;
+  .msg {
+    height: 90%;
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px dotted #999;
+    .frdMsg {}
+    .myMsg {}
+  }
+  .send {
+    margin: 0;
+    padding: 1% 0;
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    .send-msg {
+      width: 90%;
+      border: 2px solid #999;
+      outline: 0;
+      margin-left: 5%;
+      border-radius: 2rem;
+      padding: .3rem 1rem;
+      &:focus {
+        border-color: #00BCD4;
+      }
+    }
+  }
 }

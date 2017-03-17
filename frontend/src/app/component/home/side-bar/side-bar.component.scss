@@ -7,6 +7,10 @@
   a {
     display: block;
     padding: .4rem 0;
+    &.setting {
+      position: absolute;
+      bottom: 0;
+    }
     i {
       width: 2rem;
     }

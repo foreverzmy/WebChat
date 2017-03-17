@@ -70,3 +70,9 @@
 ::-webkit-scrollbar-button:horizontal:decrement:hover {
   /*当鼠标在水平滚动条下面的按钮上的状态*/
 }
+
+@mixin box0 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
