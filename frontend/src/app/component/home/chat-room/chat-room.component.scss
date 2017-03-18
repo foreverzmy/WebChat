@@ -7,8 +7,76 @@
     width: 100%;
     margin: 0;
     border-bottom: 1px dotted #999;
-    .frdMsg {}
-    .myMsg {}
+    padding-top: 1rem;
+    padding: .5rem 1rem;
+    .msg-item {
+      width: 100%;
+      margin-bottom: .5rem;
+      .frd-msg {
+        display: flex;
+        flex-direction: row;
+        img {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 1rem;
+        }
+        .msg-box {
+          padding-left: .5rem;
+          flex: 1;
+          span {
+            font-size: .1rem;
+          }
+          .msg-text {
+            width: 100%;
+            padding: 0;
+            text-align: justify;
+            font-size: .8rem;
+            max-width: 60%;
+            span {
+              padding: .5rem 1rem;
+              background-color: #00BCD4;
+              display: inline-block;
+              border-radius: 2rem;
+              border-top-left-radius: 0;
+              position: relative;
+            }
+          }
+        }
+      }
+      .my-msg {
+        display: flex;
+        flex-direction: row-reverse;
+        img {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 1rem;
+        }
+        .msg-box {
+          display: flex;
+          flex-direction: row-reverse;
+          flex: 1;
+          padding-right: .5rem;
+          span {
+            font-size: .1rem;
+          }
+          .msg-text {
+            width: 100%;
+            padding: 0;
+            text-align: justify;
+            max-width: 60%;
+            font-size: .8rem;
+            span {
+              padding: .5rem 1rem;
+              background-color: #00BCD4;
+              display: inline-block;
+              border-radius: 2rem;
+              border-top-right-radius: 0;
+              position: relative;
+            }
+          }
+        }
+      }
+    }
   }
   .send {
     margin: 0;

@@ -3,13 +3,14 @@
   width: 3rem;
   text-align: center;
   height: 100%;
-  padding-top: 2rem;
+  padding-top: 1rem;
   a {
     display: block;
     padding: .4rem 0;
     &.setting {
       position: absolute;
       bottom: 0;
+      width: 3rem;
     }
     i {
       width: 2rem;
