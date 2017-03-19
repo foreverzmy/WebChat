@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '@angular/material';
 
+import { SocketService } from '../../service/socket.service';
+
 import { HomeComponent } from './home.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { BuddyListComponent } from './buddy-list/buddy-list.component';
@@ -29,6 +31,7 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
     BuddyListComponent,
     GroupListComponent,
     ChatRoomComponent,
-  ]
+  ],
+  providers: [SocketService],
 })
 export class HomeModule { }

@@ -1,15 +1,16 @@
 const socket = require('socket.io');
 
-module.exports = function(server) {
+module.exports = function (server) {
   const io = socket(server);
 
   let messages = ['hello'];
 
   io.on('connection', socket => {
     socket
-      .on('getAllMessage', () => {
+      .on('getUnreadMessage', client => {
         // 向当前用户广播
-        socket.emit('allMessage', messages);
+        console.log(client);
+        socket.emit('allUnderMessage', messages);
       })
       .on('createMessage', msg => {
         messages.push(msg);
