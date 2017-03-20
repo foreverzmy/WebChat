@@ -1,4 +1,4 @@
-const UserDB = require('../models/user');
+const UserDB = require('../models/user.modal');
 const bcrypt = require('bcryptjs');
 
 class User {
@@ -94,5 +94,17 @@ User.findById = async function (id) {
   return user;
 }
 
+User.search = async function (text) {
+  const reg = new RegExp(text, 'gim');
+  let user = '';
+  try {
+    user = await UserDB.find({
+      email: reg
+    }, `_id email`)
+  } catch (err) {
+    throw err;
+  }
+  return user;
+}
 
 module.exports = User;

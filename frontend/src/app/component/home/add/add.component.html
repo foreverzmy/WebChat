@@ -1,0 +1,43 @@
+<div class="add">
+
+  <div class="find-input">
+    <form class="form-inline" (ngSubmit)="search()">
+      <md-input-container class="input-box">
+        <input mdInput name='name' [(ngModel)]='name' placeholder="请输入用户名或群名" required>
+      </md-input-container>
+      <div class="select">
+        <select name="range" [(ngModel)]='range'>
+          <option value="all" selected="selected">全部</option>
+          <option value="user ">用户</option>
+          <option value="group ">群组</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">搜索</button>
+    </form>
+  </div>
+
+  <div class="find-list row ">
+
+    <div class="list-item col-md-4" *ngFor="let user of userList;let i = $index">
+      <md-card class="example-card">
+        <div class="avatar">
+          <img md-card-image src="/assets/images/d50773ed03f1dde3719b5a4111098c64.jpg">
+        </div>
+        <md-card-header>
+          <md-card-title>{{user.email}}</md-card-title>
+          <md-card-subtitle>email</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p>
+            The
+          </p>
+        </md-card-content>
+        <md-card-actions>
+          <button type="button" class="btn btn-primary btn-sm" (click)='addFriend(user._id)'>加为好友</button>
+        </md-card-actions>
+      </md-card>
+    </div>
+
+  </div>
+
+</div>

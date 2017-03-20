@@ -9,8 +9,7 @@ module.exports = function (server) {
     socket
       .on('getUnreadMessage', client => {
         // 向当前用户广播
-        console.log(client);
-        socket.emit('allUnderMessage', messages);
+        socket.emit('allUnredaMessage', messages);
       })
       .on('createMessage', msg => {
         messages.push(msg);

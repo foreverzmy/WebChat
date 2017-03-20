@@ -29,4 +29,9 @@ test('findUserByName', async t => {
 test('save', async t => {
   const newUser = await user.save();
   newUser.should.be.a('object')
+});
+
+test('search', async t => {
+  const user = await user.search();
+  console.log(user);
 })

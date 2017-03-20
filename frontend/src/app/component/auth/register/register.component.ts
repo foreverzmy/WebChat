@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../service/auth.service';
@@ -13,12 +14,12 @@ interface UserInfo {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   public userInfo: UserInfo = {
     email: null,
     password: null
   };
-
+  private register;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -28,11 +29,13 @@ export class RegisterComponent implements OnInit {
   }
 
   regist() {
-    this.authService.regist(this.userInfo)
+    this.register = this.authService.regist(this.userInfo)
       .subscribe(
       succ => this.router.navigateByUrl('/'),
       err => console.log(err),
     )
   }
-
+  ngOnDestroy() {
+    this.register.unsubscribe();
+  }
 }

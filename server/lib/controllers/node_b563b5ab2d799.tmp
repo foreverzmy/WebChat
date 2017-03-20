@@ -37,7 +37,7 @@ class Test {
 }
 
 const test = new Test({
-  email: '921255@z',
+  username: 'forever',
   password: 'zzz'
 })
 
@@ -47,8 +47,5 @@ const test = new Test({
 // test.findUserByName();
 // test.findByUserOrCreate();
 
-async function aa() {
-  let a = await User.search('921255');
-  console.log(a);
-}
-aa();
+let a = User.search('921255');
+console.log(a);

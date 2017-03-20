@@ -5,15 +5,17 @@ import { AuthGuardService } from '../../service/auth-guard.service';
 import { HomeComponent } from './home.component';
 import { BuddyListComponent } from './buddy-list/buddy-list.component';
 import { GroupListComponent } from './group-list/group-list.component';
+import { AddComponent } from './add/add.component';
 
 export const HomeRoutes: Route[] = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuardService],
+    // canActivate: [AuthGuardService],
     children: [
       { path: '', component: BuddyListComponent, },
-      { path: 'groupList', component: GroupListComponent, }
+      { path: 'groupList', component: GroupListComponent, },
+      { path: 'add', component: AddComponent, }
     ]
   }
 ];

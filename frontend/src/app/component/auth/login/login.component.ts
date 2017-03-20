@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../../service/auth.service';
@@ -13,12 +14,14 @@ interface UserInfo {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public userInfo: UserInfo = {
     email: null,
     password: null
   };
   public returnUrl: string;
+  private getUser;
+  private loginConn;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -33,14 +36,17 @@ export class LoginComponent implements OnInit {
     // if (this.authService.isLogin === true) {
     //   this.router.navigateByUrl('/');
     // }
-    this.authService.getUser().subscribe(
+    this.getUser = this.authService.getUser()
+      .subscribe(
       succ => { this.router.navigateByUrl('/'); },
       err => console.log(err),
     );
   }
 
+
+
   login(): void {
-    this.authService.login(this.userInfo)
+    this.loginConn = this.authService.login(this.userInfo)
       .subscribe(
       succ => {
         this.authService.isLogin = true;
@@ -50,5 +56,7 @@ export class LoginComponent implements OnInit {
       );
   }
 
-
+  ngOnDestroy() {
+    this.getUser.unsubscribe(); this.loginConn.unsubscribe();
+  }
 }

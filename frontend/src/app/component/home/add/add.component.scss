@@ -1,0 +1,51 @@
+.add {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  .find-input {
+    width: 100%;
+    height: 5rem;
+    padding: 1rem 3rem;
+    .form-inline {
+      .input-box {
+        width: 50%;
+      }
+      .select {
+        width: 5rem;
+        margin: 0 2rem;
+        select {
+          overflow-y: hidden;
+        }
+      }
+    }
+  }
+  .find-list {
+    padding-bottom: 5rem;
+    height: 100%;
+    overflow-y: scroll;
+    .list-item {
+      margin-bottom: 1rem;
+      .avatar {
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        img {
+          margin: 0;
+          width: 2rem;
+          border-radius: 50%;
+        }
+      }
+      md-card-header {
+        margin-top: 1rem;
+      }
+      md-card-content {
+        clear: both;
+      }
+      md-card-action {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SocketService } from '../../service/socket.service';
@@ -9,7 +10,8 @@ import { SocketService } from '../../service/socket.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  private getAllMsg;
 
   constructor(
     private router: Router,
@@ -18,11 +20,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('kk');
-    this.socket.emit('getUnderMessage', '', '');
-    this.socket.on('allUnderMessage', messages => {
-      console.log(messages);
-    });
+    // console.log('kk');
+    // this.socket.emit('getUnderMessage', '', '');
+    // this.socket.on('allUnderMessage', messages => {
+    //   console.log(messages);
+    // });
+    // this.getAllMsg = this.socket.emit('getUnderMessage', '')
+    //   .subscribe(msg => console.log(msg));
   }
-
+  ngOnDestroy() {
+    // this.getAllMsg.unsubscribe();
+  }
 }
