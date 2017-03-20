@@ -15,6 +15,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { BuddyListComponent } from './buddy-list/buddy-list.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { AddComponent } from './add/add.component';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AddComponent } from './add/add.component';
     BuddyListComponent,
     GroupListComponent,
     ChatRoomComponent,
+    NotificationsComponent,
     AddComponent,
   ],
   exports: [

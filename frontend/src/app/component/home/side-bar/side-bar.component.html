@@ -1,17 +1,20 @@
 <div id="sideBar">
-  <a [routerLink]="['/']">
+  <a [routerLink]="['/']" title="消息列表">
     <i class="material-icons">home</i>
   </a>
-  <a [routerLink]="['/']">
+  <a [routerLink]="['/']" title="好友">
     <i class="material-icons">person</i>
   </a>
-  <a [routerLink]="['/']">
+  <a [routerLink]="['/']" title="群组">
     <i class="material-icons">group</i>
   </a>
-  <a [routerLink]="['/add']">
+  <a [routerLink]="['/notifications']" title="通知">
+    <i class="material-icons">notifications</i>
+  </a>
+  <a [routerLink]="['/add']" title="添加好友">
     <i class="material-icons">group_add</i>
   </a>
-  <a class="setting" [routerLink]="['/groupList']">
+  <a class="setting" [routerLink]="['/groupList']" title="设置">
     <i class="material-icons">settings</i>
   </a>
 </div>
