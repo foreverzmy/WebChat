@@ -14,8 +14,6 @@ router.post('/friend', async(ctx, next) => {
   // 查询被加好友对象socketId
   const friendsList = await User.findFriend(id);
 
-  console.log(friendsList);
-
   ctx.body = {
     success: true,
     list: friendsList,
