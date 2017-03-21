@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.listService.getFriendList();
     // console.log('kk');
     // this.socket.emit('getUnderMessage', '', '');
     // this.socket.on('allUnderMessage', messages => {

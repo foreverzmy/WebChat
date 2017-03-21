@@ -10,6 +10,7 @@ import { API_Friend } from './api';
 
 @Injectable()
 export class ListService {
+  public friendList = [];
 
   constructor(
     public http: Http,
@@ -19,14 +20,15 @@ export class ListService {
 
   // 获取好友列表
   public getFriendList() {
-    return this.http.post(API_Friend, {
+    const getFriendList = this.http.post(API_Friend, {
       id: this.authService.userInfo.id,
     }).map(this.extractData)
-      .catch(this.handleError)
-      .subscribe(
-      succ => console.log(succ),
+      .catch(this.handleError);
+    getFriendList.subscribe(
+      succ => { this.friendList = succ.list; console.log(this.friendList); },
       err => console.log(err),
     );
+    return getFriendList;
   }
 
   private extractData(res: Response) {

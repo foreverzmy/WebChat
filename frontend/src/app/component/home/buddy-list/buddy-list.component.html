@@ -1,19 +1,13 @@
 <div class="container row">
   <div class="list col-md-3">
-    <div class="list-item">
+    <div class="list-item" *ngFor='let friend of friendList'>
       <img class="avata" src="/assets/images/d50773ed03f1dde3719b5a4111098c64.jpg" alt="">
       <div class="user">
-        <p class="name">Forever</p>
+        <p class="name">{{friend.email}}</p>
         <p class="lastMsg">Tong:Hi</p>
       </div>
     </div>
-    <div class="list-item">
-      <img class="avata" src="/assets/images/d50773ed03f1dde3719b5a4111098c64.jpg" alt="">
-      <div class="user">
-        <p class="name">Forever</p>
-        <p class="lastMsg">Tong:Hi</p>
-      </div>
-    </div>
+
   </div>
   <div class="chat col-md-9">
     <app-chat-room></app-chat-room>
