@@ -16,7 +16,10 @@ router.get('/', async(ctx, next) => {
         ctx.status = 200;
         ctx.body = {
           success: true,
-          message: '登录成功'
+          userInfo: {
+            id: result._id,
+            email: result.email
+          }
         };
       }
     } else {
@@ -84,7 +87,10 @@ router.post('/', async(ctx, next) => {
     ctx.status = 200;
     ctx.body = {
       success: true,
-      message: '登录成功'
+      userInfo: {
+        id: result._id,
+        email: result.email
+      }
     };
   } else {
     ctx.status = 401;

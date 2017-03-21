@@ -36,7 +36,11 @@ export class AddComponent {
   }
 
   public addFriend(id) {
-
+    this.searchService.addFriend(id)
+      .subscribe(
+      succ => console.log(succ),
+      err => console.log(err),
+    );
   }
 
 }

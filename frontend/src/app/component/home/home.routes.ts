@@ -12,7 +12,7 @@ export const HomeRoutes: Route[] = [
   {
     path: '',
     component: HomeComponent,
-    // canActivate: [AuthGuardService],
+    canActivate: [AuthGuardService],
     children: [
       { path: '', component: BuddyListComponent, },
       { path: 'groupList', component: GroupListComponent, },

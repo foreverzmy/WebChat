@@ -6,41 +6,27 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { AuthService } from './auth.service';
-import { API_SEARCH, API_ADD, API_ACCEPT } from './api';
+import { API_Friend } from './api';
 
 @Injectable()
-export class SearchService {
+export class ListService {
 
   constructor(
     public http: Http,
     public authService: AuthService
   ) {
   }
-  // 搜索用户名或群组
-  public getUserList(info) {
-    if (info.email === null || info.range === null) {
-      return Observable.throw('请输入用户名和范围！');
-    } else {
-      return this.http.post(API_SEARCH, info)
-        .map(this.extractData)
-        .catch(this.handleError);
-    }
-  }
-  // 添加好友
-  public addFriend(id) {
-    return this.http.post(API_ADD, {
-      from: this.authService.userInfo.id,
-      to: id
-    }).map(this.extractData)
-      .catch(this.handleError);
-  }
 
-  public accetp(id) {
-    return this.http.post(API_ACCEPT, {
-      from: this.authService.userInfo.id,
-      to: id
+  // 获取好友列表
+  public getFriendList() {
+    return this.http.post(API_Friend, {
+      id: this.authService.userInfo.id,
     }).map(this.extractData)
-      .catch(this.handleError);
+      .catch(this.handleError)
+      .subscribe(
+      succ => console.log(succ),
+      err => console.log(err),
+    );
   }
 
   private extractData(res: Response) {

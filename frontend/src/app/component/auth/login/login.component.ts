@@ -33,9 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // if (this.authService.isLogin === true) {
-    //   this.router.navigateByUrl('/');
-    // }
     this.getUser = this.authService.getUser()
       .subscribe(
       succ => { this.router.navigateByUrl('/'); },
@@ -43,13 +40,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
   }
 
-
-
   login(): void {
     this.loginConn = this.authService.login(this.userInfo)
       .subscribe(
       succ => {
         this.authService.isLogin = true;
+        this.authService.userInfo = succ.userInfo;
         this.router.navigateByUrl(this.returnUrl ? this.returnUrl : '/');
       },
       err => console.log(err)
@@ -57,6 +53,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.getUser.unsubscribe(); this.loginConn.unsubscribe();
+    this.getUser.unsubscribe();
+    if (this.loginConn) {
+      this.loginConn.unsubscribe();
+    }
   }
 }

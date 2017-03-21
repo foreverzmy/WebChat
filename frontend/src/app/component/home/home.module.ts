@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/primeng';
 
 import { SocketService } from '../../service/socket.service';
 import { SearchService } from '../../service/search.service';
+import { ListService } from '../../service/list.service';
 
 import { HomeComponent } from './home.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
@@ -45,7 +46,8 @@ import { AddComponent } from './add/add.component';
   ],
   providers: [
     SocketService,
-    SearchService
+    SearchService,
+    ListService
   ],
 })
 export class HomeModule { }

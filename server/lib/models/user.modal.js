@@ -10,10 +10,11 @@ const UserSchema = new Schema({
   },
   password: String,
   salt: String,
-  avatar: {
+  socketId: {
     type: String,
-    default: '',
+    default: null,
   },
+  avatar: String,
   friends: [{
     type: Schema.Types.ObjectId,
     ref: 'User',

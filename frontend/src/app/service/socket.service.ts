@@ -11,9 +11,6 @@ export class SocketService {
   constructor() { }
 
   on(eventName) {
-    // this.socket.on(eventName, (...args) => {
-    //   callback.apply(this.socket, args);
-    // });
     const observable = new Observable(observer => {
       this.socket.on(eventName, data => {
         observer.next(data);
@@ -23,11 +20,6 @@ export class SocketService {
   }
 
   emit(eventName, msg) {
-    // this.socket.emit(eventName, data, (...args) => {
-    //   if (callback) {
-    //     callback.apply(this.socket, args);
-    //   }
-    // });
     const observable = new Observable(observer => {
       this.socket.emit(eventName, msg, () => {
         observer.next('ok');

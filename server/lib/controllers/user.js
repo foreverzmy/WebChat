@@ -107,4 +107,61 @@ User.search = async function (text) {
   return user;
 }
 
+// 保存用户socketId
+User.saveSocketId = async function (id, socketId) {
+  try {
+    await UserDB.update({
+      _id: id
+    }, {
+      socketId: socketId
+    }, {
+      multi: false
+    })
+  } catch (err) {
+    throw err;
+    return false;
+  }
+  return true;
+}
+
+// 查找用户socketId
+User.findSocketId = async function (id) {
+  let user = '';
+  try {
+    user = await User.findById(id);
+  } catch (err) {
+    throw err;
+  }
+  return user.socketId;
+}
+
+User.saveNewFriend = async function (id, friendId) {
+  try {
+    await UserDB.update({
+      _id: id
+    }, {
+      "$push": {
+        friends: friendId
+      }
+    })
+  } catch (err) {
+    throw err;
+  }
+}
+
+User.findFriend = async function (id) {
+  let frinendList = '';
+  try {
+    const userInfo = await UserDB.findById(id);
+    frinendList = await UserDB.find({
+      _id: {
+        '$in': userInfo.friends
+      },
+    }, ['_id', 'email']);
+  } catch (err) {
+    throw err;
+  }
+  return frinendList;
+}
+
 module.exports = User;

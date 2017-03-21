@@ -1,8 +1,8 @@
 <div class="container row">
 
-  <div class="col-sm-12">
-    <p>xxx 加你为好友</p>
-    <button>接受</button>
+  <div class="col-sm-12" *ngFor='let msg of msgs;let i = $index'>
+    <p>{{msg.email}} 加你为好友</p>
+    <button (click)='accept(msg.id)'>接受</button>
     <button>拒绝</button>
   </div>
 

@@ -14,6 +14,8 @@ const validateXSRF = require('.//lib/controllers/validateXSRF');
 const login = require('./lib/routes/login');
 const register = require('./lib/routes/register');
 const search = require('./lib/routes/search');
+const add = require('./lib/routes/addFrined');
+const list = require('./lib/routes/list');
 
 const app = new Koa();
 const server = http.Server(app.callback());
@@ -50,5 +52,7 @@ router
   .use('/login', login.routes(), login.allowedMethods())
   .use('/register', register.routes(), register.allowedMethods())
   .use('/search', search.routes(), search.allowedMethods())
+  .use('/add', add.routes(), add.allowedMethods())
+  .use('/list', list.routes(), list.allowedMethods())
 
 module.exports = server;

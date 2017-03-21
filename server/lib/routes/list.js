@@ -6,31 +6,19 @@ const {
 
 const router = new Router();
 
-router.post('/', async(ctx, next) => {
+router.post('/friend', async(ctx, next) => {
   const {
-    from,
-    to
+    id
   } = ctx.request.body;
 
   // 查询被加好友对象socketId
-  const toSocketId = await User.findSocketId(to);
+  const friendsList = await User.findFriend(id);
 
-  // 如果被加好友对象在线
-  if (toSocketId) {
-    const fromUser = await User.findById(from);
+  console.log(friendsList);
 
-    const message = {
-      email: fromUser.email,
-      id: fromUser._id,
-    }
-    global.io.sockets.connected[toSocketId].emit('notice', message);
-
-  } else { // 如果不在线，则把消息存入数据库
-
-  }
   ctx.body = {
     success: true,
-    message: '请求已发送'
+    list: friendsList,
   };
   await next();
 });

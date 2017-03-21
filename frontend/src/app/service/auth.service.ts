@@ -14,9 +14,15 @@ interface User {
   repass?: string;
 }
 
+interface UserInfo {
+  id: string;
+  email: string;
+}
+
 @Injectable()
 export class AuthService {
   public isLogin = false;
+  public userInfo: UserInfo;
 
   constructor(
     public http: Http,
@@ -24,14 +30,19 @@ export class AuthService {
   }
 
   public getUser() {
-    return new Observable(observer => {
-      this.http.get(API_LOGIN)
-        .map(this.extractData)
-        .subscribe(
-        succ => this.isLogin = true,
-        err => this.isLogin = false,
-      );
-    });
+    const isLog = this.http.get(API_LOGIN)
+      .map(this.extractData)
+      .catch(this.handleError);
+
+    isLog.subscribe(
+      succ => {
+        this.isLogin = true;
+        this.userInfo = succ.userInfo;
+      },
+      err => this.isLogin = false,
+    );
+
+    return isLog;
   }
 
   public login(userInfo) {
