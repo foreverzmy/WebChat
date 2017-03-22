@@ -8,6 +8,9 @@ import * as io from 'socket.io-client';
 export class SocketService {
   public socket = io('http://localhost:9000');
 
+  public messageList = {
+  };
+
   constructor() { }
 
   on(eventName) {

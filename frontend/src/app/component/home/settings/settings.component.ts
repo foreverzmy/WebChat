@@ -6,11 +6,11 @@ import { SocketService } from '../../../service/socket.service';
 import { SearchService } from '../../../service/search.service';
 
 @Component({
-  selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
 })
-export class NotificationsComponent implements OnInit {
+export class SettingsComponent implements OnInit {
   private msgs = [];
   constructor(
     private socket: SocketService,
@@ -23,14 +23,6 @@ export class NotificationsComponent implements OnInit {
       succ => this.msgs.push(succ),
       err => console.log(err)
       );
-  }
-
-  accept(id) {
-    this.searchService.accetp(id)
-      .subscribe(
-      succ => console.log(succ),
-      err => console.log(err),
-    );
   }
 
 }

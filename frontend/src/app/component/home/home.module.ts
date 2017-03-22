@@ -14,10 +14,10 @@ import { ListService } from '../../service/list.service';
 import { HomeComponent } from './home.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { BuddyListComponent } from './buddy-list/buddy-list.component';
-import { GroupListComponent } from './group-list/group-list.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { AddComponent } from './add/add.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -31,18 +31,18 @@ import { AddComponent } from './add/add.component';
     HomeComponent,
     SideBarComponent,
     BuddyListComponent,
-    GroupListComponent,
     ChatRoomComponent,
     NotificationsComponent,
     AddComponent,
+    SettingsComponent,
   ],
   exports: [
     HomeComponent,
     SideBarComponent,
     BuddyListComponent,
-    GroupListComponent,
     ChatRoomComponent,
     AddComponent,
+    SettingsComponent,
   ],
   providers: [
     SocketService,

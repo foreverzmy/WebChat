@@ -13,6 +13,7 @@ import { ListService } from '../../../service/list.service';
 })
 export class BuddyListComponent implements OnInit {
   private friendList = [];
+  private room: string;
 
   constructor(
     private socket: SocketService,
@@ -30,13 +31,6 @@ export class BuddyListComponent implements OnInit {
           this.friendList = succ.list;
         },
       );
-    }
-
-    if (this.authService.isLogin === true) {
-      this.socket.emit('getUnreadMessage', this.authService.userInfo.id)
-        .subscribe(() => console.log('ok'));
-      this.socket.on('allUnredaMessage')
-        .subscribe(msg => console.log(msg));
     }
   }
 }
