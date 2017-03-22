@@ -41,7 +41,7 @@ export class ChatRoomComponent implements OnInit, OnChanges {
         from: this.authService.userInfo.id,
         to: this.room,
         date: new Date(),
-        message: this.message
+        content: this.message
       }))
       .do(x => this.message = '')
       .subscribe(msg => {

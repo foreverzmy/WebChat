@@ -1,6 +1,5 @@
 const Router = require('koa-router');
 const User = require('../controllers/user');
-const jwt = require('jsonwebtoken');
 
 const router = new Router();
 

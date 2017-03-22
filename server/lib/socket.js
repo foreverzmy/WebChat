@@ -8,6 +8,10 @@ module.exports = function (server) {
 
   this.io.on('connection', socket => {
     socket
+      // 监听用户退出事件
+      .on('disconnect', client => {
+        User.delSocketId(socket.id);
+      })
       .on('getUnreadMessage', client => {
         // 向当前用户广播
         User.saveSocketId(client, socket.id);
@@ -27,11 +31,14 @@ module.exports = function (server) {
         const toSocketId = await User.findSocketId(to);
 
         // 如果发送消息对象在线
-        if (toSocketId) {
+        if (toSocketId !== null) {
+
           this.io.sockets.connected[toSocketId].emit('sendMsg', msg);
-        } else { // 如果不在线，则把消息存入数据库
+
+        } else { // 如果不在线，则不发送
 
         }
+
       })
   });
 }

@@ -135,6 +135,23 @@ User.findSocketId = async function (id) {
   return user.socketId;
 }
 
+// 删除用户socketId
+User.delSocketId = async function (socketId) {
+  try {
+    await UserDB.update({
+      socketId: socketId
+    }, {
+      socketId: null
+    }, {
+      multi: false
+    })
+  } catch (err) {
+    throw err;
+    return false;
+  }
+  return true;
+}
+
 User.saveNewFriend = async function (id, friendId) {
   try {
     await UserDB.update({
