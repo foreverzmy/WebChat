@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { OnInit, OnChanges } from '@angular/core';
+import { ElementRef, EventEmitter } from '@angular/core';
 import { Input, Output, SimpleChanges } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
 
 import { SocketService } from '../../../service/socket.service';
 import { AuthService } from '../../../service/auth.service';
@@ -20,40 +23,33 @@ export class ChatRoomComponent implements OnInit, OnChanges {
   constructor(
     private socket: SocketService,
     private authService: AuthService,
+    private elementRef: ElementRef
   ) {
+    // const sendMsg$ = Observable
+    //   .fromEvent(elementRef.nativeElement, 'keyup')
+    //   .filter((e: any) => e.keyCode === 13)
+    //   .map(() => this.message)
+    //   .subscribe(
+    //   (date) => console.log(date),
+    // )
   }
 
   ngOnInit() {
-    if (this.room && this.socket.messageList[this.room]) {
-      this.messageList = this.socket.messageList[this.room];
-    } else {
-      this.messageList = [];
+    // 初始化消息列表
+    if (!this.socket.messageList[this.room]) {
+      this.socket.messageList[this.room] = [];
     }
 
-    // 接收消息
-    this.socket.on('sendMsg')
-      .subscribe(
-      (msg: any) => {
-        // 将消息存入数组
-        if (!this.socket.messageList[msg.from]) {
-          this.socket.messageList[msg.from] = [];
-        }
-        this.messageList.push(msg);
-        this.socket.messageList[msg.from].push(msg);
-      },
-      err => console.log(err),
-    );
   }
 
   // 发消息对象更改时赋予新的消息列表
   ngOnChanges(changes: SimpleChanges) {
-    if (this.socket.messageList[this.room]) {
-      this.messageList = this.socket.messageList[this.room];
-    } else {
-      this.messageList = [];
+    if (!this.socket.messageList[this.room]) {
+      this.socket.messageList[this.room] = [];
     }
   }
 
+  // 根据发送消息对象设置 class
   setClass(from) {
     if (from === this.room) {
       return 'frd-msg';
@@ -69,23 +65,17 @@ export class ChatRoomComponent implements OnInit, OnChanges {
       date: new Date(),
       message: this.message
     };
-    this.sendSocket(msg);
+
+    this.sendSub = this.socket.emit('sendMsg', msg)
+      .subscribe(
+      succ => { },
+    );
     this.message = '';
-    if (!this.socket.messageList[msg.to]) {
-      this.socket.messageList[msg.to] = [];
-    }
-    this.messageList.push(msg);
-    this.socket.messageList[msg.to].push(msg);
+    this.socket.messageList[this.room].push(msg);
   }
 
   trackByTime(index, msg) {
     return msg.date;
   }
 
-  sendSocket(msg) {
-    this.sendSub = this.socket.emit('sendMsg', msg)
-      .subscribe(
-      succ => { },
-    );
-  }
 }

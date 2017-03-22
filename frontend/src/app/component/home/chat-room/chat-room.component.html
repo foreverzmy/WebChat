@@ -1,7 +1,7 @@
 <div class="container">
   <div class="msg" *ngIf='room'>
 
-    <div class="msg-item" *ngFor="let msg of messageList;let i=$index">
+    <div class="msg-item" *ngFor="let msg of socket.messageList[room];let i=$index">
       <!--trackBy:trackByTime-->
       <div [ngClass]="setClass(msg.from)">
         <img src="../../../../assets/images/d50773ed03f1dde3719b5a4111098c64.jpg" alt="">
