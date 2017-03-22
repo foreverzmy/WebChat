@@ -24,14 +24,28 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    // 接收消息
     this.socket.on('sendMsg')
       .subscribe(
       (msg: any) => {
+        // 初始化消息列表
+        if (!this.socket.messageList[msg.from]) {
+          this.socket.messageList[msg.from] = [];
+        }
         // 将消息存入数组
         this.socket.messageList[msg.from].push(msg);
       },
       err => console.log(err),
     );
+
+    // 接收通知
+    this.socket.on('notice')
+      .subscribe(
+      succ => this.socket.noticeList.push(succ),
+      err => console.log(err)
+      );
+
     // console.log('kk');
     // this.socket.emit('getUnderMessage', '', '');
     // this.socket.on('allUnderMessage', messages => {

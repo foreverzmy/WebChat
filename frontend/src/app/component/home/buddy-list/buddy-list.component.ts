@@ -33,4 +33,13 @@ export class BuddyListComponent implements OnInit {
       );
     }
   }
+
+  // 获取该联系人最后一条消息
+  getLastMsg(id) {
+    if (this.socket.messageList[id] && this.socket.messageList[id][this.socket.messageList[id].length - 1]) {
+      return this.socket.messageList[id][this.socket.messageList[id].length - 1].message;
+    } else {
+      return null;
+    }
+  }
 }

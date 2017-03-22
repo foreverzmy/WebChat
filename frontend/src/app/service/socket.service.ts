@@ -10,6 +10,7 @@ export class SocketService {
 
   public messageList = {
   };
+  public noticeList = [];
 
   constructor() { }
 

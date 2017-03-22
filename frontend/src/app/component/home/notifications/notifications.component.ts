@@ -11,19 +11,12 @@ import { SearchService } from '../../../service/search.service';
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent implements OnInit {
-  private msgs = [];
   constructor(
     private socket: SocketService,
     private searchService: SearchService,
   ) {
   }
-  ngOnInit() {
-    this.socket.on('notice')
-      .subscribe(
-      succ => this.msgs.push(succ),
-      err => console.log(err)
-      );
-  }
+  ngOnInit() { }
 
   accept(id) {
     this.searchService.accetp(id)

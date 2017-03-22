@@ -25,7 +25,7 @@ export class ListService {
     }).map(this.extractData)
       .catch(this.handleError);
     getFriendList.subscribe(
-      succ => { this.friendList = succ.list; console.log(this.friendList); },
+      succ => this.friendList = succ.list,
       err => console.log(err),
     );
     return getFriendList;

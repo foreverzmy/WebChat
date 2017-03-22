@@ -17,7 +17,7 @@
   </div>
 
   <div class="send" *ngIf='room'>
-    <input class="send-msg" type="text" [(ngModel)]='message' (keyup.enter)="sendMsg()">
+    <input class="send-msg" type="text" [(ngModel)]='message' (keyup.enter)="sendMsg$.next($event)">
   </div>
 
 </div>

@@ -4,6 +4,7 @@ import { ElementRef, EventEmitter } from '@angular/core';
 import { Input, Output, SimpleChanges } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 import { SocketService } from '../../../service/socket.service';
 import { AuthService } from '../../../service/auth.service';
@@ -18,20 +19,15 @@ export class ChatRoomComponent implements OnInit, OnChanges {
   @Output() lastSend;
   private message: string;
   private messageList = [];
-  private sendSub;
+  private sendSub$;
+  private sendMsg$ = new Subject<any>();
 
   constructor(
     private socket: SocketService,
     private authService: AuthService,
     private elementRef: ElementRef
   ) {
-    // const sendMsg$ = Observable
-    //   .fromEvent(elementRef.nativeElement, 'keyup')
-    //   .filter((e: any) => e.keyCode === 13)
-    //   .map(() => this.message)
-    //   .subscribe(
-    //   (date) => console.log(date),
-    // )
+
   }
 
   ngOnInit() {
@@ -40,6 +36,22 @@ export class ChatRoomComponent implements OnInit, OnChanges {
       this.socket.messageList[this.room] = [];
     }
 
+    this.sendMsg$.map(
+      (e: any) => ({
+        from: this.authService.userInfo.id,
+        to: this.room,
+        date: new Date(),
+        message: this.message
+      }))
+      .do(x => this.message = '')
+      .subscribe(msg => {
+        this.socket.emit('sendMsg', msg)
+          .subscribe(
+          succ => { },
+        );
+        this.socket.messageList[this.room].push(msg);
+      });
+
   }
 
   // 发消息对象更改时赋予新的消息列表
@@ -47,6 +59,7 @@ export class ChatRoomComponent implements OnInit, OnChanges {
     if (!this.socket.messageList[this.room]) {
       this.socket.messageList[this.room] = [];
     }
+
   }
 
   // 根据发送消息对象设置 class
@@ -56,22 +69,6 @@ export class ChatRoomComponent implements OnInit, OnChanges {
     } else {
       return 'my-msg';
     }
-  }
-
-  sendMsg() {
-    const msg = {
-      from: this.authService.userInfo.id,
-      to: this.room,
-      date: new Date(),
-      message: this.message
-    };
-
-    this.sendSub = this.socket.emit('sendMsg', msg)
-      .subscribe(
-      succ => { },
-    );
-    this.message = '';
-    this.socket.messageList[this.room].push(msg);
   }
 
   trackByTime(index, msg) {

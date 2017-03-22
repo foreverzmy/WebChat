@@ -18,7 +18,7 @@ export class SideBarComponent implements OnInit {
       this.socket.emit('getUnreadMessage', this.authService.userInfo.id)
         .subscribe(() => console.log('ok'));
       this.socket.on('allUnredaMessage')
-        .subscribe(msg => console.log(msg));
+        .subscribe(msg => console.log(''));
     }
   }
 }
