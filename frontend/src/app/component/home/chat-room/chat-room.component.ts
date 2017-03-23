@@ -8,6 +8,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { SocketService } from '../../../service/socket.service';
 import { AuthService } from '../../../service/auth.service';
+import { ListService } from '../../../service/list.service';
 
 @Component({
   selector: 'app-chat-room',
@@ -25,7 +26,8 @@ export class ChatRoomComponent implements OnInit, OnChanges {
   constructor(
     private socket: SocketService,
     private authService: AuthService,
-    private elementRef: ElementRef
+    private listService: ListService,
+    private elementRef: ElementRef,
   ) {
 
   }
@@ -51,7 +53,6 @@ export class ChatRoomComponent implements OnInit, OnChanges {
         );
         this.socket.messageList[this.room].push(msg);
       });
-
   }
 
   // 发消息对象更改时赋予新的消息列表
@@ -68,6 +69,18 @@ export class ChatRoomComponent implements OnInit, OnChanges {
       return 'frd-msg';
     } else {
       return 'my-msg';
+    }
+  }
+
+  getName(id) {
+    if (this.authService.userInfo.id === id) {
+      return this.authService.userInfo.email;
+    } else {
+      for (const frd of this.listService.friendList) {
+        if (frd._id === id) {
+          return frd.email;
+        }
+      }
     }
   }
 

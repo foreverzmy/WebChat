@@ -6,7 +6,7 @@
       <div [ngClass]="setClass(msg.from)">
         <img src="../../../../assets/images/d50773ed03f1dde3719b5a4111098c64.jpg" alt="">
         <div class="msg-box">
-          <span>forever</span>
+          <span>{{getName(msg.from)}}</span>
           <div class="msg-text">
             <span>{{msg.content}}</span>
           </div>
