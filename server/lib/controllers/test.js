@@ -1,54 +1,37 @@
-const mongoose = require('mongoose');
+'use strict'
+import test from 'ava';
+import mongoose from 'mongoose';
+// 核心代码，是否开启测试
+import User from './user';
+import chai from 'chai';
 
+const should = chai.should();
+
+mongoose.set('debug', false);
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/webchat')
 
-const User = require('./user');
-
-class Test {
-  constructor(obj) {
-    this.user = new User(obj);
-  }
-
-  async hashPassword() {
-    const hash = await this.user.hashPassword();
-    console.log(hash)
-  }
-
-  async findUserByName() {
-    const user = await this.user.findUserByName();
-    console.log(user)
-  }
-
-  async save() {
-    const newUser = await this.user.save();
-    console.log(newUser);
-  }
-
-  async findByUserOrCreate() {
-    const newUser = await this.user.findByUserOrCreate();
-    console.log(newUser);
-  }
-
-  async authenticate() {
-    const hashPass = await this.user.authenticate();
-    console.log(hashPass);
-  }
-}
-
-const test = new Test({
-  email: '921255@z',
+const user = new User({
+  username: 'forever',
   password: 'zzz'
 })
 
-// test.hashPassword();
-// test.save();
-// test.authenticate();
-// test.findUserByName();
-// test.findByUserOrCreate();
+test('hashPassword', async t => {
+  const hash = await user.hashPassword();
+  t.true(hash.length === 60);
+});
 
-async function aa() {
-  let a = await User.search('921255');
-  console.log(a);
-}
-aa();
+test('findUserByName', async t => {
+  const userInfo = await user.findUserByName();
+  t.is(userInfo, '');
+});
+
+test('save', async t => {
+  const newUser = await user.save();
+  newUser.should.be.a('object')
+});
+
+test('search', async t => {
+  const user = await user.search();
+  console.log(user);
+})

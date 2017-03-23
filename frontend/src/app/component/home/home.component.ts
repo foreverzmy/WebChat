@@ -45,14 +45,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       succ => this.socket.noticeList.push(succ),
       err => console.log(err)
       );
-
-    // console.log('kk');
-    // this.socket.emit('getUnderMessage', '', '');
-    // this.socket.on('allUnderMessage', messages => {
-    //   console.log(messages);
-    // });
-    // this.getAllMsg = this.socket.emit('getUnderMessage', '')
-    //   .subscribe(msg => console.log(msg));
   }
   ngOnDestroy() {
     // this.getAllMsg.unsubscribe();

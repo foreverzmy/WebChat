@@ -21,9 +21,29 @@ class Message {
       throw err;
       return false;
     }
-    return newMessage._id;
+    return true;
   }
 
+}
+
+Message.findUnreadMsg = async function (id) {
+  let UnReadMsgList = {};
+  try {
+    UnReadMsgList = await MessageDB.find({
+      isRead: false,
+      "$or": [{
+        from: id
+      }, {
+        to: id
+      }]
+    }).sort({
+      createTime: 1
+    });
+  } catch (err) {
+    throw err;
+    return false;
+  }
+  return UnReadMsgList;
 }
 
 module.exports = Message;
