@@ -16,7 +16,7 @@
     </form>
   </div>
 
-  <div class="find-list row ">
+  <div class="find-list row" *ngIf='create'>
 
     <div class="list-item col-md-4" *ngFor="let user of userList;let i = $index">
       <md-card class="example-card">
@@ -38,6 +38,11 @@
       </md-card>
     </div>
 
+  </div>
+
+  <div *ngIf='!create&&name'>
+    没有找到 {{name}} 用户或群组，创建一个群组？
+    <button>创建群组</button>
   </div>
 
 </div>

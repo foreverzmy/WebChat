@@ -10,9 +10,17 @@ router.post('/', async(ctx, next) => {
   } = ctx.request.body;
 
   const user = await User.search(name);
-  console.log(this);
 
-  ctx.body = user;
+  if (!user[0]) {
+    ctx.body = {
+      success: false
+    }
+  } else {
+    ctx.body = {
+      success: true,
+      content: user
+    }
+  }
   await next();
 })
 

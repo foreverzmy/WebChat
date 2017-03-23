@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { OnInit, OnChanges } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
 import { Input, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { SocketService } from '../../../service/socket.service';
 import { AuthService } from '../../../service/auth.service';
@@ -11,26 +12,42 @@ import { ListService } from '../../../service/list.service';
   templateUrl: './buddy-list.component.html',
   styleUrls: ['./buddy-list.component.scss']
 })
-export class BuddyListComponent implements OnInit {
-  private friendList = [];
+export class BuddyListComponent implements OnInit, OnDestroy {
   private room: string;
+  private type: any;
+  private sub: any;
 
   constructor(
+    private _activitedRoute: ActivatedRoute,
     private socket: SocketService,
     private authService: AuthService,
     private listService: ListService,
   ) {
-    this.friendList = this.listService.friendList;
   }
   ngOnInit() {
-    if (!this.friendList.length) {
-      this.listService.getFriendList()
-        .subscribe(
-        succ => {
-          this.listService.friendList = succ.list;
-          this.friendList = succ.list;
-        },
-      );
+    this.changeType();
+    this.getFriendList();
+  }
+
+  // 更换列表
+  changeType() {
+    this.sub = this._activitedRoute.params
+      .subscribe(
+      params => console.log(params),
+    );
+  }
+
+  // 获取好友列表
+  getFriendList() {
+    if (!this.listService.friendList.length) {
+      this.listService.getFriendList();
+    }
+  }
+
+  // 获取群组列表
+  getGroupList() {
+    if (!this.listService.groupList.length) {
+      this.listService.getGroupList();
     }
   }
 
@@ -41,5 +58,8 @@ export class BuddyListComponent implements OnInit {
     } else {
       return null;
     }
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

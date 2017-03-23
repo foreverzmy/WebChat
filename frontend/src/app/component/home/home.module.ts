@@ -11,6 +11,8 @@ import { SocketService } from '../../service/socket.service';
 import { SearchService } from '../../service/search.service';
 import { ListService } from '../../service/list.service';
 
+import { AutoScrollToBottomDirective } from '../../directive/auto-scroll-to-bottom.directive';
+
 import { HomeComponent } from './home.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { BuddyListComponent } from './buddy-list/buddy-list.component';
@@ -28,6 +30,7 @@ import { SettingsComponent } from './settings/settings.component';
     FormsModule,
   ],
   declarations: [
+    AutoScrollToBottomDirective,
     HomeComponent,
     SideBarComponent,
     BuddyListComponent,

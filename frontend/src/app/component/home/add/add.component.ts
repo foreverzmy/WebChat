@@ -15,6 +15,7 @@ export class AddComponent {
   private name: string;
   private range = 'all';
   private userList = [];
+  private create = true;
 
   constructor(
     private searchService: SearchService
@@ -30,7 +31,14 @@ export class AddComponent {
 
     this.searchService.getUserList(info)
       .subscribe(
-      succ => this.userList = succ,
+      data => {
+        if (data.success === true) {
+          this.userList = data.content;
+          this.create = true;
+        } else {
+          this.create = false;
+        };
+      },
       err => console.log(err),
     );
   }

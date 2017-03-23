@@ -14,7 +14,8 @@ export const HomeRoutes: Route[] = [
     component: HomeComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: '', component: BuddyListComponent, },
+      { path: '', redirectTo: 'chat/list', pathMatch: 'full' },
+      { path: 'chat/:type', component: BuddyListComponent, },
       { path: 'notifications', component: NotificationsComponent, },
       { path: 'add', component: AddComponent, },
       { path: 'settings', component: SettingsComponent, },

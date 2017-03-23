@@ -1,8 +1,7 @@
 <div class="container">
-  <div class="msg" *ngIf='room'>
 
+  <div class="msg" *ngIf='room' appAutoScrollToBottom>
     <div class="msg-item" *ngFor="let msg of socket.messageList[room];let i=$index">
-      <!--trackBy:trackByTime-->
       <div [ngClass]="setClass(msg.from)">
         <img src="../../../../assets/images/d50773ed03f1dde3719b5a4111098c64.jpg" alt="">
         <div class="msg-box">
@@ -13,11 +12,10 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="send" *ngIf='room'>
-    <input class="send-msg" type="text" [(ngModel)]='message' (keyup.enter)="sendMsg$.next($event)">
+    <input class="send-msg" type="text" [(ngModel)]='message' (keyup.enter)="sendMsg$.next($event)" placeholder="说点什么...">
   </div>
 
 </div>

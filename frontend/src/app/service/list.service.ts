@@ -7,10 +7,12 @@ import 'rxjs/add/observable/throw';
 
 import { AuthService } from './auth.service';
 import { API_Friend } from './api';
+import { API_Group } from './api';
 
 @Injectable()
 export class ListService {
   public friendList = [];
+  public groupList = [];
 
   constructor(
     public http: Http,
@@ -20,15 +22,26 @@ export class ListService {
 
   // 获取好友列表
   public getFriendList() {
-    const getFriendList = this.http.post(API_Friend, {
+    this.http.post(API_Friend, {
       id: this.authService.userInfo.id,
     }).map(this.extractData)
-      .catch(this.handleError);
-    getFriendList.subscribe(
+      .catch(this.handleError)
+      .subscribe(
       succ => this.friendList = succ.list,
       err => console.log(err),
     );
-    return getFriendList;
+  }
+
+  // 获取群组列表
+  public getGroupList() {
+    this.http.post(API_Group, {
+      id: this.authService.userInfo.id,
+    }).map(this.extractData)
+      .catch(this.handleError)
+      .subscribe(
+      succ => this.groupList = succ.list,
+      err => console.log(err),
+    );
   }
 
   private extractData(res: Response) {
