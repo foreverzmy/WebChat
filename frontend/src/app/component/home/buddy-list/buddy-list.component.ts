@@ -28,34 +28,28 @@ export class BuddyListComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.changeType();
-    this.getFriendList();
   }
 
   // 更换列表
   changeType() {
     this.sub = this._activitedRoute.params
-      .subscribe(
-      (params: any) => {
+      .subscribe((params: any) => {
         this.type = params.type;
-
         switch (params.type) {
           case 'list':
-          case 'frinend':
+          case 'friend':
             this.getFriendList();
             break;
           case 'group':
             this.getGroupList();
             break;
-          default:
-            this.getFriendList();
-            break;
         }
-      },
-    );
+      });
   }
 
   // 获取好友列表
   getFriendList() {
+    this.groupList = [];
     if (!this.listService.friendList.length) {
       this.listService.getFriendList()
         .subscribe(
@@ -66,12 +60,12 @@ export class BuddyListComponent implements OnInit, OnDestroy {
         err => console.log(err),
       );
     }
-    this.groupList = [];
     this.friendList = this.listService.friendList;
   }
 
   // 获取群组列表
   getGroupList() {
+    this.friendList = [];
     if (!this.listService.groupList.length) {
       this.listService.getGroupList()
         .subscribe(
@@ -82,7 +76,6 @@ export class BuddyListComponent implements OnInit, OnDestroy {
         err => console.log(err),
       );
     }
-    this.friendList = [];
     this.groupList = this.listService.groupList;
   }
 

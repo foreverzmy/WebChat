@@ -85,4 +85,18 @@ Group.join = async function (groupId, userId) {
   }
 }
 
+Group.findMembers = async function (id) {
+
+  let membersList = {};
+
+  try {
+    membersList = await GroupDB.findById(id, 'members')
+  } catch (err) {
+    throw err;
+    return false;
+  }
+
+  return membersList.members;
+}
+
 module.exports = Group;

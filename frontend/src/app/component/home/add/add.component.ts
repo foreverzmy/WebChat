@@ -54,7 +54,7 @@ export class AddComponent implements OnDestroy {
 
   // 申请加为好友
   public addFriend(user) {
-    this.searchService.addFriend(user.id)
+    this.searchService.addFriend(user._id)
       .subscribe(
       data => {
         if (data.success) {

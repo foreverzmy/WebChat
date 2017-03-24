@@ -41,28 +41,7 @@ export class ChatRoomComponent implements OnInit, OnChanges {
     }
 
     // 发送消息
-    this.sendMsg$.map(
-      (e: any) => ({
-        from: this.authService.userInfo.id,
-        to: this.room,
-        date: new Date(),
-        content: this.message
-      }))
-      .do(x => this.message = '')
-      .subscribe(msg => {
-        if (this.type === 'group') {
-          this.socket.emit('sendGroupMsg', msg)
-            .subscribe(
-            succ => { },
-          );
-        } else {
-          this.socket.emit('sendMsg', msg)
-            .subscribe(
-            succ => { },
-          );
-        }
-        this.socket.messageList[this.room].push(msg);
-      });
+    this.sendMsg();
   }
 
   // 发消息对象更改时赋予新的消息列表
@@ -76,6 +55,25 @@ export class ChatRoomComponent implements OnInit, OnChanges {
 
       }
     }
+  }
+
+  sendMsg() {
+    this.sendMsg$.map(
+      (e: any) => ({
+        group: this.type === 'group' ? true : false,
+        from: this.authService.userInfo.id,
+        to: this.room,
+        date: new Date(),
+        content: this.message
+      }))
+      .do(x => this.message = '')
+      .subscribe(msg => {
+        this.socket.emit('sendMsg', msg)
+          .subscribe(
+          succ => { },
+        );
+        this.socket.messageList[this.room].push(msg);
+      });
   }
 
   // 根据发送消息对象设置 class

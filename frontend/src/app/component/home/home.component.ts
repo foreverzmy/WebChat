@@ -30,11 +30,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(
       (msg: any) => {
         // 初始化消息列表
-        if (!this.socket.messageList[msg.from]) {
-          this.socket.messageList[msg.from] = [];
+        if (msg.group === false) {
+          if (!this.socket.messageList[msg.from]) {
+            this.socket.messageList[msg.from] = [];
+          }
+          // 将消息存入数组
+          this.socket.messageList[msg.from].push(msg);
+        } else {
+          if (!this.socket.messageList[msg.to]) {
+            this.socket.messageList[msg.to] = [];
+          }
+          // 将消息存入数组
+          this.socket.messageList[msg.to].push(msg);
         }
-        // 将消息存入数组
-        this.socket.messageList[msg.from].push(msg);
       },
       err => console.log(err),
     );
