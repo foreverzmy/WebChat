@@ -17,6 +17,7 @@ export class AddComponent implements OnDestroy {
   private name: string;
   private range = 'all';
   private userList = [];
+  private groupList = [];
   private create = true;
   private getUserListSub;
   private addFriendSub;
@@ -29,6 +30,7 @@ export class AddComponent implements OnDestroy {
 
   }
 
+  // 查找分组或好友
   public search() {
     const info = {
       name: this.name,
@@ -39,16 +41,18 @@ export class AddComponent implements OnDestroy {
       .subscribe(
       data => {
         if (data.success === true) {
-          this.userList = data.content;
-          this.create = true;
-        } else {
+          this.userList = data.content.user;
+          this.groupList = data.content.group;
           this.create = false;
+        } else {
+          this.create = true;
         };
       },
       err => console.log(err),
     );
   }
 
+  // 申请加为好友
   public addFriend(id) {
     this.searchService.addFriend(id)
       .subscribe(
@@ -57,6 +61,16 @@ export class AddComponent implements OnDestroy {
     );
   }
 
+  public joinGroup(id) {
+    this.searchService.joinGroup(id)
+      .subscribe(
+      data => console.log(data),
+      err => console.log(err),
+    )
+  }
+
+
+  // 创建分组
   public creatGroup() {
     this.ListService.creatGroup(this.name)
       .subscribe(

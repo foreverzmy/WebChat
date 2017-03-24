@@ -55,5 +55,29 @@ router.post('/create', async(ctx, next) => {
   await next();
 })
 
+// 加入群组
+router.post('/join', async(ctx, next) => {
+  const {
+    from,
+    to,
+  } = ctx.request.body;
+
+  const join = await Group.join(to, from);
+
+  const save = await User.saveNewGroup(from, to);
+
+  if (join && save) {
+
+    ctx.body = {
+      success: true,
+    }
+  } else {
+    ctx.body = {
+      success: false,
+    }
+  }
+
+  await next();
+})
 
 module.exports = router;

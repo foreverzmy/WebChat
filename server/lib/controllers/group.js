@@ -57,4 +57,32 @@ Group.findByName = async function (name) {
   return true;
 }
 
+Group.search = async function (text) {
+  const reg = new RegExp(text, 'gim');
+  let group = '';
+  try {
+    group = await GroupDB.find({
+      name: reg
+    }, `_id name`)
+  } catch (err) {
+    throw err;
+  }
+  return group;
+}
+
+Group.join = async function (groupId, userId) {
+  try {
+    await GroupDB.update({
+      _id: groupId
+    }, {
+      "$push": {
+        members: userId
+      }
+    })
+  } catch (err) {
+    throw err;
+    return false;
+  }
+}
+
 module.exports = Group;

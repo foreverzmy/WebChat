@@ -218,5 +218,4 @@ User.findGroup = async function (id) {
   return groupList;
 }
 
-
 module.exports = User;

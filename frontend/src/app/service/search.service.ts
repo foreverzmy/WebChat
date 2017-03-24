@@ -7,6 +7,7 @@ import 'rxjs/add/observable/throw';
 
 import { AuthService } from './auth.service';
 import { API_SEARCH, API_ADD, API_ACCEPT } from './api';
+import { API_GROUPJOIN } from './api';
 
 @Injectable()
 export class SearchService {
@@ -29,6 +30,15 @@ export class SearchService {
   // 添加好友
   public addFriend(id) {
     return this.http.post(API_ADD, {
+      from: this.authService.userInfo.id,
+      to: id
+    }).map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  // 加入群组
+  public joinGroup(id) {
+    return this.http.post(API_GROUPJOIN, {
       from: this.authService.userInfo.id,
       to: id
     }).map(this.extractData)

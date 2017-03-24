@@ -9,3 +9,4 @@ export const API_ACCEPT = `${API}/add/accept`;
 export const API_FRIEND = `${API}/friend`;
 export const API_GROUP = `${API}/group`;
 export const API_GROUPCTEATE = `${API}/group/create`;
+export const API_GROUPJOIN = `${API}/group/join`;

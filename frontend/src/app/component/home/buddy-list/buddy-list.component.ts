@@ -36,6 +36,8 @@ export class BuddyListComponent implements OnInit, OnDestroy {
     this.sub = this._activitedRoute.params
       .subscribe(
       (params: any) => {
+        this.type = params.type;
+
         switch (params.type) {
           case 'list':
           case 'frinend':

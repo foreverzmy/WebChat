@@ -17,7 +17,9 @@ import { ListService } from '../../../service/list.service';
 })
 export class ChatRoomComponent implements OnInit, OnChanges {
   @Input() room: string;
+  @Input() type: string;
   @Output() lastSend;
+
   private message: string;
   private messageList = [];
   private sendSub$;
@@ -38,6 +40,7 @@ export class ChatRoomComponent implements OnInit, OnChanges {
       this.socket.messageList[this.room] = [];
     }
 
+    // 发送消息
     this.sendMsg$.map(
       (e: any) => ({
         from: this.authService.userInfo.id,
@@ -47,10 +50,17 @@ export class ChatRoomComponent implements OnInit, OnChanges {
       }))
       .do(x => this.message = '')
       .subscribe(msg => {
-        this.socket.emit('sendMsg', msg)
-          .subscribe(
-          succ => { },
-        );
+        if (this.type === 'group') {
+          this.socket.emit('sendGroupMsg', msg)
+            .subscribe(
+            succ => { },
+          );
+        } else {
+          this.socket.emit('sendMsg', msg)
+            .subscribe(
+            succ => { },
+          );
+        }
         this.socket.messageList[this.room].push(msg);
       });
   }
@@ -60,7 +70,12 @@ export class ChatRoomComponent implements OnInit, OnChanges {
     if (!this.socket.messageList[this.room]) {
       this.socket.messageList[this.room] = [];
     }
+    // 当列表类型变化时
+    for (const propName in changes) {
+      if (propName === 'type') {
 
+      }
+    }
   }
 
   // 根据发送消息对象设置 class

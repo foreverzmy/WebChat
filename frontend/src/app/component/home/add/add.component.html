@@ -16,7 +16,7 @@
     </form>
   </div>
 
-  <div class="find-list row" *ngIf='create'>
+  <div class="find-list row">
 
     <div class="list-item col-md-4" *ngFor="let user of userList;let i = $index">
       <md-card class="example-card">
@@ -33,7 +33,27 @@
           </p>
         </md-card-content>
         <md-card-actions>
-          <button type="button" class="btn btn-primary btn-sm" (click)='addFriend(user._id)'>加为好友</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)='addFriend(user._id)'>申请加为好友</button>
+        </md-card-actions>
+      </md-card>
+    </div>
+
+    <div class="list-item col-md-4" *ngFor="let group of groupList;let i = $index">
+      <md-card class="example-card">
+        <div class="avatar">
+          <img md-card-image src="/assets/images/d50773ed03f1dde3719b5a4111098c64.jpg">
+        </div>
+        <md-card-header>
+          <md-card-title>{{group.name}}</md-card-title>
+          <md-card-subtitle>email</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p>
+            The
+          </p>
+        </md-card-content>
+        <md-card-actions>
+          <button type="button" class="btn btn-primary btn-sm" (click)='joinGroup(group._id)'>申请加入分组</button>
         </md-card-actions>
       </md-card>
     </div>
