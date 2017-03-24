@@ -34,7 +34,6 @@ module.exports = function (socket) {
         const membersList = await Group.findMembers(to);
 
         for (let member of membersList) {
-          console.log(member);
           if (member != from) {
             const toSocketId = await User.findSocketId(member);
 
