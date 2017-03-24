@@ -6,7 +6,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  public socket = io('http://localhost:9000');
+  public socket = io('http://115.115.39.224:9000');
 
   public messageList = {
   };
