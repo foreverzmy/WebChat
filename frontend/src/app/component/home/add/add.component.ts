@@ -25,7 +25,7 @@ export class AddComponent implements OnDestroy {
 
   constructor(
     private searchService: SearchService,
-    private ListService: ListService,
+    private listService: ListService,
   ) {
 
   }
@@ -53,18 +53,26 @@ export class AddComponent implements OnDestroy {
   }
 
   // 申请加为好友
-  public addFriend(id) {
-    this.searchService.addFriend(id)
+  public addFriend(user) {
+    this.searchService.addFriend(user.id)
       .subscribe(
-      succ => console.log(succ),
+      data => {
+        if (data.success) {
+          this.listService.friendList.push(user);
+        }
+      },
       err => console.log(err),
     );
   }
 
-  public joinGroup(id) {
-    this.searchService.joinGroup(id)
+  public joinGroup(group) {
+    this.searchService.joinGroup(group._id)
       .subscribe(
-      data => console.log(data),
+      data => {
+        if (data.success) {
+          this.listService.groupList.push(group);
+        }
+      },
       err => console.log(err),
     )
   }
@@ -72,11 +80,11 @@ export class AddComponent implements OnDestroy {
 
   // 创建分组
   public creatGroup() {
-    this.ListService.creatGroup(this.name)
+    this.listService.creatGroup(this.name)
       .subscribe(
       data => {
         if (data.success) {
-          this.ListService.groupList.push(data.content);
+          this.listService.groupList.push(data.content);
         }
       },
       err => console.log(err)

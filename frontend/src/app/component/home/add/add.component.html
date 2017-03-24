@@ -16,7 +16,7 @@
     </form>
   </div>
 
-  <div class="find-list row">
+  <div class="find-list row" *ngIf='!create'>
 
     <div class="list-item col-md-4" *ngFor="let user of userList;let i = $index">
       <md-card class="example-card">
@@ -33,7 +33,7 @@
           </p>
         </md-card-content>
         <md-card-actions>
-          <button type="button" class="btn btn-primary btn-sm" (click)='addFriend(user._id)'>申请加为好友</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)='addFriend(user)'>申请加为好友</button>
         </md-card-actions>
       </md-card>
     </div>
@@ -53,14 +53,14 @@
           </p>
         </md-card-content>
         <md-card-actions>
-          <button type="button" class="btn btn-primary btn-sm" (click)='joinGroup(group._id)'>申请加入分组</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)='joinGroup(group)'>申请加入分组</button>
         </md-card-actions>
       </md-card>
     </div>
 
   </div>
 
-  <div *ngIf='!create&&name'>
+  <div *ngIf='create && name'>
     没有找到 {{name}} 用户或群组，创建一个群组？
     <button (click)='creatGroup()'>创建群组</button>
   </div>
