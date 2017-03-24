@@ -4,6 +4,10 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+  createTime: {
+    type: Date,
+    default: Date.now,
+  },
   email: {
     type: String,
     trim: true,

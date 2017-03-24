@@ -15,7 +15,8 @@ const login = require('./lib/routes/login');
 const register = require('./lib/routes/register');
 const search = require('./lib/routes/search');
 const add = require('./lib/routes/addFrined');
-const list = require('./lib/routes/list');
+const friend = require('./lib/routes/friend');
+const group = require('./lib/routes/group');
 
 const app = new Koa();
 const server = http.Server(app.callback());
@@ -53,6 +54,7 @@ router
   .use('/register', register.routes(), register.allowedMethods())
   .use('/search', search.routes(), search.allowedMethods())
   .use('/add', add.routes(), add.allowedMethods())
-  .use('/list', list.routes(), list.allowedMethods())
+  .use('/friend', friend.routes(), friend.allowedMethods())
+  .use('/group', group.routes(), group.allowedMethods())
 
 module.exports = server;

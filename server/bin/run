@@ -2,7 +2,7 @@ const debug = require('debug');
 const server = require('../app');
 const socket = require('socket.io');
 global.io = socket(server);
-require('../lib/socket')();
+require('../lib/socket/socket')();
 
 
 const port = normalizePort(process.env.PORT || 9000);

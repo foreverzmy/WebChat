@@ -1,9 +1,11 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { Input, SimpleChanges } from '@angular/core';
 
 import { DropdownModule } from 'primeng/primeng';
 
 import { SearchService } from '../../../service/search.service';
+import { ListService } from '../../../service/list.service';
 
 @Component({
   selector: 'app-add',
@@ -11,14 +13,18 @@ import { SearchService } from '../../../service/search.service';
   styleUrls: ['./add.component.scss'],
   providers: [DropdownModule]
 })
-export class AddComponent {
+export class AddComponent implements OnDestroy {
   private name: string;
   private range = 'all';
   private userList = [];
   private create = true;
+  private getUserListSub;
+  private addFriendSub;
+  private creatGroupSub;
 
   constructor(
-    private searchService: SearchService
+    private searchService: SearchService,
+    private ListService: ListService,
   ) {
 
   }
@@ -29,7 +35,7 @@ export class AddComponent {
       range: this.range
     };
 
-    this.searchService.getUserList(info)
+    this.getUserListSub = this.searchService.getUserList(info)
       .subscribe(
       data => {
         if (data.success === true) {
@@ -49,6 +55,30 @@ export class AddComponent {
       succ => console.log(succ),
       err => console.log(err),
     );
+  }
+
+  public creatGroup() {
+    this.ListService.creatGroup(this.name)
+      .subscribe(
+      data => {
+        if (data.success) {
+          this.ListService.groupList.push(data.content);
+        }
+      },
+      err => console.log(err)
+      );
+  }
+
+  ngOnDestroy() {
+    if (this.getUserListSub) {
+      this.getUserListSub.unsubscribe();
+    }
+    if (this.addFriendSub) {
+      this.addFriendSub.unsubscribe();
+    }
+    if (this.creatGroupSub) {
+      this.creatGroupSub.unsubscribe();
+    }
   }
 
 }

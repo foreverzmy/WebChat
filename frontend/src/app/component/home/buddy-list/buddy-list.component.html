@@ -1,10 +1,18 @@
 <div class="container row">
   <div class="list col-md-3">
-    <div class="list-item" *ngFor='let friend of listService.friendList' (click)="room = friend._id">
+    <div class="list-item" *ngFor='let friend of friendList' (click)="room = friend._id">
       <img class="avata" src="/assets/images/d50773ed03f1dde3719b5a4111098c64.jpg" alt="">
       <div class="user">
         <p class="name">{{friend.email}}</p>
-        <p class="lastMsg"><span>ss: </span>{{ getLastMsg(friend._id) }}</p>
+        <p class="lastMsg">{{ getLastMsg(friend._id) }}</p>
+      </div>
+    </div>
+
+    <div class="list-item" *ngFor='let group of groupList' (click)="room = group._id">
+      <img class="avata" src="/assets/images/d50773ed03f1dde3719b5a4111098c64.jpg" alt="">
+      <div class="user">
+        <p class="name">{{ group.name}}</p>
+        <!--<p class="lastMsg"><span>ss: </span>{{ getLastMsg(friend._id) }}</p>-->
       </div>
     </div>
 

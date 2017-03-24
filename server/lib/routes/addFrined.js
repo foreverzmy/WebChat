@@ -2,10 +2,11 @@ const Router = require('koa-router');
 const User = require('../controllers/user');
 const {
   io
-} = require('../socket');
+} = require('../socket/socket');
 
 const router = new Router();
 
+// 申请加为好友
 router.post('/', async(ctx, next) => {
   const {
     from,
@@ -35,6 +36,7 @@ router.post('/', async(ctx, next) => {
   await next();
 });
 
+// 同意好友申请
 router.post('/accept', async(ctx, next) => {
   const {
     from,

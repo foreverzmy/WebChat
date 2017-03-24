@@ -42,7 +42,7 @@
 
   <div *ngIf='!create&&name'>
     没有找到 {{name}} 用户或群组，创建一个群组？
-    <button>创建群组</button>
+    <button (click)='creatGroup()'>创建群组</button>
   </div>
 
 </div>

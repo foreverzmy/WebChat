@@ -6,8 +6,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { AuthService } from './auth.service';
-import { API_Friend } from './api';
-import { API_Group } from './api';
+import { API_FRIEND } from './api';
+import { API_GROUP } from './api';
+import { API_GROUPCTEATE } from './api';
 
 @Injectable()
 export class ListService {
@@ -17,31 +18,31 @@ export class ListService {
   constructor(
     public http: Http,
     public authService: AuthService
-  ) {
-  }
+  ) { }
 
   // 获取好友列表
   public getFriendList() {
-    this.http.post(API_Friend, {
+    return this.http.post(API_FRIEND, {
       id: this.authService.userInfo.id,
     }).map(this.extractData)
-      .catch(this.handleError)
-      .subscribe(
-      succ => this.friendList = succ.list,
-      err => console.log(err),
-    );
+      .catch(this.handleError);
   }
 
   // 获取群组列表
   public getGroupList() {
-    this.http.post(API_Group, {
-      id: this.authService.userInfo.id,
+    return this.http.post(API_GROUP, {
+      _id: this.authService.userInfo.id,
     }).map(this.extractData)
-      .catch(this.handleError)
-      .subscribe(
-      succ => this.groupList = succ.list,
-      err => console.log(err),
-    );
+      .catch(this.handleError);
+  }
+
+  // 创建群组
+  public creatGroup(name) {
+    return this.http.post(API_GROUPCTEATE, {
+      name: name,
+      creator: this.authService.userInfo.id,
+    }).map(this.extractData)
+      .catch(this.handleError);
   }
 
   private extractData(res: Response) {

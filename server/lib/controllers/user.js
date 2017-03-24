@@ -1,4 +1,5 @@
 const UserDB = require('../models/user.modal');
+const GroupDB = require('../models/group.modal');
 const bcrypt = require('bcryptjs');
 
 class User {
@@ -152,6 +153,7 @@ User.delSocketId = async function (socketId) {
   return true;
 }
 
+// 添加好友
 User.saveNewFriend = async function (id, friendId) {
   try {
     await UserDB.update({
@@ -166,6 +168,7 @@ User.saveNewFriend = async function (id, friendId) {
   }
 }
 
+// 查找好友
 User.findFriend = async function (id) {
   let frinendList = '';
   try {
@@ -180,5 +183,40 @@ User.findFriend = async function (id) {
   }
   return frinendList;
 }
+
+// 添加群组
+User.saveNewGroup = async function (id, groupId) {
+  try {
+    await UserDB.update({
+      _id: id
+    }, {
+      "$push": {
+        groups: groupId
+      }
+    })
+  } catch (err) {
+    throw err;
+    return false
+  }
+  return true;
+}
+
+// 查找群组
+User.findGroup = async function (id) {
+  let groupList = '';
+  try {
+    const userInfo = await UserDB.findById(id);
+    groupList = await GroupDB.find({
+      _id: {
+        '$in': userInfo.groups
+      },
+    }, ['_id', 'name']);
+  } catch (err) {
+    throw err;
+    return false;
+  }
+  return groupList;
+}
+
 
 module.exports = User;

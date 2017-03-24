@@ -16,6 +16,8 @@ export class BuddyListComponent implements OnInit, OnDestroy {
   private room: string;
   private type: any;
   private sub: any;
+  private friendList: any[];
+  private groupList: any[];
 
   constructor(
     private _activitedRoute: ActivatedRoute,
@@ -33,22 +35,53 @@ export class BuddyListComponent implements OnInit, OnDestroy {
   changeType() {
     this.sub = this._activitedRoute.params
       .subscribe(
-      params => console.log(params),
+      (params: any) => {
+        switch (params.type) {
+          case 'list':
+          case 'frinend':
+            this.getFriendList();
+            break;
+          case 'group':
+            this.getGroupList();
+            break;
+          default:
+            this.getFriendList();
+            break;
+        }
+      },
     );
   }
 
   // 获取好友列表
   getFriendList() {
     if (!this.listService.friendList.length) {
-      this.listService.getFriendList();
+      this.listService.getFriendList()
+        .subscribe(
+        succ => {
+          this.listService.friendList = succ.content;
+          this.friendList = this.listService.friendList;
+        },
+        err => console.log(err),
+      );
     }
+    this.groupList = [];
+    this.friendList = this.listService.friendList;
   }
 
   // 获取群组列表
   getGroupList() {
     if (!this.listService.groupList.length) {
-      this.listService.getGroupList();
+      this.listService.getGroupList()
+        .subscribe(
+        succ => {
+          this.listService.groupList = succ.content;
+          this.groupList = this.listService.groupList;
+        },
+        err => console.log(err),
+      );
     }
+    this.friendList = [];
+    this.groupList = this.listService.groupList;
   }
 
   // 获取该联系人最后一条消息
@@ -59,6 +92,7 @@ export class BuddyListComponent implements OnInit, OnDestroy {
       return null;
     }
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
