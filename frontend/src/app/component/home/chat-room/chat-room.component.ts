@@ -78,10 +78,10 @@ export class ChatRoomComponent implements OnInit, OnChanges {
 
   // 根据发送消息对象设置 class
   setClass(from) {
-    if (from === this.room) {
-      return 'frd-msg';
-    } else {
+    if (from === this.authService.userInfo.id) {
       return 'my-msg';
+    } else {
+      return 'frd-msg';
     }
   }
 

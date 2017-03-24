@@ -21,9 +21,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
         .subscribe();
 
       this.socket.on('allUnreadMsg')
-        .subscribe((msgs: any[]) => {
+        .subscribe((msgs: any) => {
           // 将消息存入数组
-          msgs.forEach((msg: any) => {
+          msgs.message.forEach((msg: any) => {
             let frdId = '';  // 好友 id
             if (msg.from === this.authService.userInfo.id) {
               frdId = msg.to;
@@ -35,6 +35,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
             }
             this.socket.messageList[frdId].push(msg);
           });
+
+          msgs.groupMsg.forEach((msg: any) => {
+            if (!this.socket.messageList[msg.to]) {
+              this.socket.messageList[msg.to] = [];
+            }
+            this.socket.messageList[msg.to].push(msg);
+          })
         });
     }
   }

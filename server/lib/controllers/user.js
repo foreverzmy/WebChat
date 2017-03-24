@@ -201,6 +201,18 @@ User.saveNewGroup = async function (id, groupId) {
   return true;
 }
 
+// 查找群组 ID
+User.findGroupId = async function (id) {
+  let groupList = '';
+  try {
+    groupList = await UserDB.findById(id, 'groups')
+  } catch (err) {
+    throw err;
+    return false;
+  }
+  return groupList.groups;
+}
+
 // 查找群组
 User.findGroup = async function (id) {
   let groupList = '';

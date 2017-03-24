@@ -1,6 +1,7 @@
 const User = require('../controllers/user');
 const Group = require('../controllers/group');
 const Message = require('../controllers/message');
+const GroupMessage = require('../controllers/group-message');
 
 module.exports = function (socket) {
   socket
@@ -25,12 +26,17 @@ module.exports = function (socket) {
         } else { // 如果不在线，则不发送
         }
       } else { //群组消息
+
+        // 将发送的消息存到数据库
+        const newMsg = new GroupMessage(msg);
+        const saveMsg = await newMsg.save();
+
         const membersList = await Group.findMembers(to);
+
         for (let member of membersList) {
           console.log(member);
           if (member != from) {
             const toSocketId = await User.findSocketId(member);
-            console.log(from, toSocketId);
 
             if (toSocketId !== null) {
               this.io.sockets.connected[toSocketId].emit('sendMsg', msg);
