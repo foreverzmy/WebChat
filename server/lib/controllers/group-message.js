@@ -12,6 +12,7 @@ class GroupMessage {
     const newGroupMessage = new GroupMessageDB({
       from: this.from,
       to: this.to,
+      email: this.email,
       type: 'text',
       content: this.content
     });

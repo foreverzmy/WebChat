@@ -36,7 +36,6 @@ module.exports = function (socket) {
         for (let member of membersList) {
           if (member != from) {
             const toSocketId = await User.findSocketId(member);
-
             if (toSocketId !== null) {
               this.io.sockets.connected[toSocketId].emit('sendMsg', msg);
             } else { // 如果不在线，则不发送
@@ -45,6 +44,5 @@ module.exports = function (socket) {
         }
       }
     })
-
 
 }

@@ -17,6 +17,7 @@ const GroupMessageSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  email: String,
   type: {
     type: String,
     enum: ['text', 'image', 'code', 'url'],

@@ -4,9 +4,11 @@ import { Observable } from 'rxjs/Observable';
 
 import * as io from 'socket.io-client';
 
+import { SOCKET_PROD } from './api';
+
 @Injectable()
 export class SocketService {
-  public socket = io('http://115.115.39.224:9000');
+  public socket = io(SOCKET_PROD);
 
   public messageList = {
   };
