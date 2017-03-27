@@ -7,12 +7,19 @@ import { SearchService } from '../../../service/search.service';
 import { ListService } from '../../../service/list.service';
 
 @Component({
-  selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss']
+  selector: 'app-notice',
+  template: './notice.component.html',
+  styleUrls: ['./notice.component.scss']
 })
 export class NotificationsComponent implements OnInit {
-  private type: string;
+  private _defaults = {
+    text: 'default message',
+    cssClass: ''
+  };
+
+  text: string;
+  messages: NoticeInterface[] = [];
+  _grayOut: boolean = false;
 
   constructor(
     private socket: SocketService,
@@ -24,20 +31,5 @@ export class NotificationsComponent implements OnInit {
 
   }
 
-  accept(id) {
-    this.searchService.accetp(id)
-      .subscribe(
-      succ => {
-        this.listService.getFriendList()
-          .subscribe(
-          data => {
-            this.listService.friendList = data.content;
-          },
-          err => console.log(err),
-        );
-      },
-      err => console.log(err),
-    );
-  }
 
 }

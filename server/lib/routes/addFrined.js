@@ -21,14 +21,15 @@ router.post('/', async(ctx, next) => {
     const fromUser = await User.findById(from);
 
     const message = {
+      type: 'add',
       email: fromUser.email,
       id: fromUser._id,
     }
     global.io.sockets.connected[toSocketId].emit('notice', message);
 
   } else { // 如果不在线，则把消息存入数据库
-
   }
+
   ctx.body = {
     success: true,
     message: '请求已发送'
@@ -45,6 +46,23 @@ router.post('/accept', async(ctx, next) => {
 
   await User.saveNewFriend(from, to);
   await User.saveNewFriend(to, from);
+
+  const toSocketId = await User.findSocketId(to);
+
+  // 如果被加好友对象在线
+  if (toSocketId) {
+    const fromUser = await User.findById(from);
+
+    const message = {
+      type: 'addAccept',
+      email: fromUser.email,
+      id: fromUser._id,
+    }
+
+    global.io.sockets.connected[toSocketId].emit('notice', message);
+  } else { // 如果不在线，则把消息存入数据库
+
+  }
 
   ctx.body = {
     success: true,

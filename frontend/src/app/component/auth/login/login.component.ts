@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   public returnUrl: string;
   private getUser;
   private loginConn;
+  public options = {
+    position: ['top', 'right'],
+    timeOut: 3000,
+    lastOnBottom: false
+  };
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -58,4 +64,5 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loginConn.unsubscribe();
     }
   }
+
 }
