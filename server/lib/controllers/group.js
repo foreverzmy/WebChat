@@ -19,10 +19,10 @@ class Group {
     try {
       saveGroup = await newGroup.save();
     } catch (err) {
-      throw err;
+      // throw err;
       return false;
     }
-    return newGroup;
+    return saveGroup;
   }
 
 }
@@ -32,7 +32,7 @@ Group.findById = async function (_id) {
   try {
     group = await GroupDB.findById(_id);
   } catch (err) {
-    throw err;
+    // throw err;
     return false;
   }
   if (group[0]) {
@@ -48,7 +48,7 @@ Group.findByName = async function (name) {
       name: name
     });
   } catch (err) {
-    throw err;
+    // throw err;
     return false;
   }
   if (group[0]) {
@@ -80,7 +80,7 @@ Group.join = async function (groupId, userId) {
       }
     })
   } catch (err) {
-    throw err;
+    // throw err;
     return false;
   }
 }
@@ -92,11 +92,11 @@ Group.findMembers = async function (id) {
   try {
     membersList = await GroupDB.findById(id, 'members')
   } catch (err) {
-    throw err;
+    // throw err;
     return false;
   }
 
   return membersList.members;
-}
+};
 
 module.exports = Group;

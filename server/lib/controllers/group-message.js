@@ -16,11 +16,10 @@ class GroupMessage {
       type: 'text',
       content: this.content
     });
-    let savedMsg = '';
     try {
-      savedMsg = await newGroupMessage.save();
+      await newGroupMessage.save();
     } catch (err) {
-      throw err;
+      // throw err;
       return false;
     }
     return true;
@@ -40,7 +39,7 @@ GroupMessage.findUnreadMsg = async function (id) {
       createTime: 1
     });
   } catch (err) {
-    throw err;
+    // throw err;
     return false;
   }
   return UnReadMsgList;

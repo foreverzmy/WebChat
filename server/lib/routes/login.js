@@ -41,7 +41,7 @@ router.get('/', async(ctx, next) => {
     };
   }
   await next();
-})
+});
 
 router.post('/', async(ctx, next) => {
   let {
@@ -73,13 +73,13 @@ router.post('/', async(ctx, next) => {
     let token = jwt.sign({
       id: result._id,
       xsrf: xsrf
-    }, CONFIG.app.secretKey)
-    ctx.cookies.set("XSRF-TOKEN", xsrf, {
+    }, CONFIG.app.secretKey);
+    ctx.cookies.set('XSRF-TOKEN', xsrf, {
       httpOnly: false,
       overwrite: true,
       expires: new Date(new Date().getTime() + 5184000000)
     });
-    ctx.cookies.set("jwt", token, {
+    ctx.cookies.set('jwt', token, {
       httpOnly: true,
       overwrite: true,
       expires: new Date(new Date().getTime() + 5184000000)
@@ -100,6 +100,6 @@ router.post('/', async(ctx, next) => {
     };
   }
   await next();
-})
+});
 
 module.exports = router;
