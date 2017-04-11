@@ -24,8 +24,8 @@ export class BuddyListComponent implements OnInit, OnDestroy {
     private socket: SocketService,
     private authService: AuthService,
     private listService: ListService,
-  ) {
-  }
+  ) { }
+
   ngOnInit() {
     this.changeType();
   }
@@ -82,7 +82,19 @@ export class BuddyListComponent implements OnInit, OnDestroy {
   // 获取该联系人最后一条消息
   getLastMsg(id) {
     if (this.socket.messageList[id] && this.socket.messageList[id][this.socket.messageList[id].length - 1]) {
-      return this.socket.messageList[id][this.socket.messageList[id].length - 1].content;
+      const message = this.socket.messageList[id];
+      const content = message[this.socket.messageList[id].length - 1].content;
+      if (this.type === 'group') {
+        let sendName;
+        if (message[this.socket.messageList[id].length - 1].from === this.authService.userInfo.id) {
+          sendName = '我';
+        } else {
+          sendName = message[this.socket.messageList[id].length - 1].email;
+        }
+        return `${sendName}:${content}`;
+      } else {
+        return content;
+      }
     } else {
       return null;
     }

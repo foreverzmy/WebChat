@@ -2,16 +2,13 @@ import { Component } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Input, SimpleChanges } from '@angular/core';
 
-import { DropdownModule } from 'primeng/primeng';
-
 import { SearchService } from '../../../service/search.service';
 import { ListService } from '../../../service/list.service';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss'],
-  providers: [DropdownModule]
+  styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnDestroy {
   private name: string;

@@ -2,29 +2,31 @@ import { Component } from '@angular/core';
 import { OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../service/auth.service';
-import { SocketService } from '../../service/socket.service';
-import { ListService } from '../../service/list.service';
+import { NotificationsService } from 'angular2-notifications';
 
+import { SocketService } from '../../service/socket.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private getAllMsg;
+  public options = {
+    position: ['top', 'right'],
+    timeOut: 3000,
+    lastOnBottom: false
+  };
 
   constructor(
     private router: Router,
-    private authService: AuthService,
     private socket: SocketService,
-    private listService: ListService,
-  ) {
-  }
+    private notice: NotificationsService,
+  ) { }
 
   ngOnInit() {
-
+    this.showLoad();
     // 接收消息
     this.socket.on('sendMsg')
       .subscribe(
@@ -50,10 +52,43 @@ export class HomeComponent implements OnInit, OnDestroy {
     // 接收通知
     this.socket.on('notice')
       .subscribe(
-      succ => this.socket.noticeList.push(succ),
+      data => {
+        // 显示通知
+        this.showNewNitice();
+        this.socket.noticeList.push(data);
+      },
       err => console.log(err)
       );
   }
+
+  showNewNitice() {
+    this.notice.info(
+      '好友通知',
+      '您收到新的好友通知',
+      {
+        timeOut: 3000,
+        showProgressBar: false,
+        pauseOnHover: true,
+        clickToClose: true,
+        maxLength: 10
+      }
+    );
+  }
+
+  showLoad() {
+    this.notice.success(
+      '认证通知',
+      '登录成功！',
+      {
+        timeOut: 3000,
+        showProgressBar: false,
+        pauseOnHover: true,
+        clickToClose: true,
+        maxLength: 10
+      }
+    );
+  }
+
   ngOnDestroy() {
     // this.getAllMsg.unsubscribe();
   }

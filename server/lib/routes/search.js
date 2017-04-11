@@ -16,7 +16,7 @@ router.post('/', async(ctx, next) => {
   if (!user[0] && !group[0]) {
     ctx.body = {
       success: false
-    }
+    };
   } else {
     ctx.body = {
       success: true,

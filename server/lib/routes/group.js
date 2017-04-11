@@ -17,7 +17,7 @@ router.post('/', async(ctx, next) => {
     content: groupList
   }
   await next();
-})
+});
 
 // 创建群组
 router.post('/create', async(ctx, next) => {
@@ -45,15 +45,15 @@ router.post('/create', async(ctx, next) => {
     } else {
       ctx.body = {
         success: false,
-      }
+      };
     }
   } else {
     ctx.body = {
       success: false,
-    }
+    };
   }
   await next();
-})
+});
 
 // 加入群组
 router.post('/join', async(ctx, next) => {
@@ -70,7 +70,7 @@ router.post('/join', async(ctx, next) => {
 
     ctx.body = {
       success: true,
-    }
+    };
   } else {
     ctx.body = {
       success: false,
@@ -78,6 +78,6 @@ router.post('/join', async(ctx, next) => {
   }
 
   await next();
-})
+});
 
 module.exports = router;

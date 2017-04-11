@@ -1,16 +1,14 @@
-const jwt = require('jsonwebtoken');
-
 const User = require('../controllers/user');
 const Message = require('../controllers/message');
 const GroupMessage = require('../controllers/group-message');
 const messageSocket = require('./message');
 
-module.exports = function (server) {
+module.exports = function () {
 
   this.io.on('connection', socket => {
     socket
       // 监听用户退出事件
-      .on('disconnect', client => {
+      .on('disconnect', () => {
         User.delSocketId(socket.id);
       })
       .on('getUnreadMsg', async client => {
@@ -25,7 +23,7 @@ module.exports = function (server) {
           message: UnreadMsg,
           groupMsg: UnreadGroupMsg
         });
-      })
+      });
 
     messageSocket(socket);
   });

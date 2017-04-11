@@ -3,6 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 
 import { SOCKET } from './api';
+<<<<<<< HEAD
+=======
+import { SOCKET_PROD } from './api';
+>>>>>>> d27ce0a763acba0b25b51616cb643736f0376775
 
 @Injectable()
 export class SocketService {

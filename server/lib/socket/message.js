@@ -18,7 +18,7 @@ module.exports = function (socket) {
 
         // 将发送的消息存到数据库
         const newMsg = new Message(msg);
-        const saveMsg = await newMsg.save();
+        await newMsg.save();
 
         // 如果发送消息对象在线
         if (toSocketId !== null) {
@@ -29,14 +29,13 @@ module.exports = function (socket) {
 
         // 将发送的消息存到数据库
         const newMsg = new GroupMessage(msg);
-        const saveMsg = await newMsg.save();
+        await newMsg.save();
 
         const membersList = await Group.findMembers(to);
 
         for (let member of membersList) {
           if (member != from) {
             const toSocketId = await User.findSocketId(member);
-
             if (toSocketId !== null) {
               this.io.sockets.connected[toSocketId].emit('sendMsg', msg);
             } else { // 如果不在线，则不发送
@@ -45,6 +44,5 @@ module.exports = function (socket) {
         }
       }
     })
-
 
 }

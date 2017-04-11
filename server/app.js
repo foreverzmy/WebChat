@@ -3,9 +3,9 @@ const Koa = require('koa');
 const http = require('http');
 const convert = require('koa-convert');
 const bodyparser = require('koa-bodyparser');
-const session = require('koa-session');
+// const session = require('koa-session');
 const Router = require('koa-router');
-const jwt = require('koa-jwt');
+// const jwt = require('koa-jwt');
 const cors = require('koa2-cors');
 const mongoose = require('mongoose');
 

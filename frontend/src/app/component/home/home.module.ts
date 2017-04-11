@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
-import { DropdownModule } from 'primeng/primeng';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { SocketService } from '../../service/socket.service';
 import { SearchService } from '../../service/search.service';
@@ -25,9 +25,9 @@ import { SettingsComponent } from './settings/settings.component';
   imports: [
     CommonModule,
     MaterialModule,
-    DropdownModule,
     RouterModule,
     FormsModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   declarations: [
     AutoScrollToBottomDirective,
@@ -50,7 +50,7 @@ import { SettingsComponent } from './settings/settings.component';
   providers: [
     SocketService,
     SearchService,
-    ListService
+    ListService,
   ],
 })
 export class HomeModule { }

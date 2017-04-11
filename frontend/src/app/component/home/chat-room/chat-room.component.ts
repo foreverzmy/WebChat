@@ -63,6 +63,7 @@ export class ChatRoomComponent implements OnInit, OnChanges {
         group: this.type === 'group' ? true : false,
         from: this.authService.userInfo.id,
         to: this.room,
+        email: this.authService.userInfo.email,
         date: new Date(),
         content: this.message
       }))
