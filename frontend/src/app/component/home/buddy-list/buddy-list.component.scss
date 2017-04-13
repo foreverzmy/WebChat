@@ -43,6 +43,9 @@
           padding-left: .2rem;
           font-size: .3rem;
           color: #757575;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }

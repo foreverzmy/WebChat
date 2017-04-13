@@ -7,5 +7,14 @@
     "pathRewrite": {
       "^/api": ""
     }
+  },
+  "/socket.io/*": {
+    "target": "http://localhost:9000/socket.io",
+    "changeOrigin": true,
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/socket.io": ""
+    }
   }
 }
