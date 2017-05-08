@@ -147,7 +147,6 @@ User.delSocketId = async function (socketId) {
       multi: false
     })
   } catch (err) {
-    throw err;
     return false;
   }
   return true;

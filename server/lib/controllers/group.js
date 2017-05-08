@@ -75,7 +75,7 @@ Group.join = async function (groupId, userId) {
     await GroupDB.update({
       _id: groupId
     }, {
-      "$push": {
+      '$push': {
         members: userId
       }
     })
