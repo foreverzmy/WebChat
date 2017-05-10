@@ -24,8 +24,8 @@
       height: 8vh;
       background-color: rgba(0, 188, 215, 0.25);
       bottom: 0;
-      -webkit-animation: square 5s infinite;
-      animation: square 5s infinite;
+      -webkit-animation: square 25s infinite;
+      animation: square 25s infinite;
       -webkit-transition-timing-function: linear;
       transition-timing-function: linear;
       &:nth-child(1) {
