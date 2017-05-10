@@ -1,13 +1,13 @@
 <div class="container">
-  <h1>Welcome</h1>
+  <h1>登录</h1>
   <form (ngSubmit)="login()" class="form">
-    <input type="text" name="email" [(ngModel)]="userInfo.email" placeholder="请输入邮箱">
+    <input type="text" name="email" [(ngModel)]="userInfo.email" placeholder="请输入邮箱账号">
     <small class="text-muted">We'll never share your email with anyone else.</small>
     <input type="password" name="password" [(ngModel)]="userInfo.password" placeholder="请输入密码">
     <div class="footer">
-      <input class="btn" type="submit" value="Submit">
-      <input class="btn" type="reset" value="Reset">
-      <a class="btn" [routerLink]="['/auth/register']">Register</a>
+      <input class="btn" type="submit" value="登录">
+      <input class="btn" type="reset" value="重置">
+      <a class="btn" [routerLink]="['/auth/register']">注册</a>
     </div>
   </form>
 </div>
