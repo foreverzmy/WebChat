@@ -12,12 +12,12 @@ import { ListService } from '../../../service/list.service';
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent implements OnInit {
-  private type: string;
+  public type: string;
 
   constructor(
-    private socket: SocketService,
-    private searchService: SearchService,
-    private listService: ListService,
+    public socket: SocketService,
+    public searchService: SearchService,
+    public listService: ListService,
   ) { }
 
   ngOnInit() {

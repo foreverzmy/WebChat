@@ -17,7 +17,7 @@ module.exports = function () {
 
         const UnreadGroupMsg = await GroupMessage.findUnreadMsg(client);
 
-
+        console.log(client, socket.id)
         User.saveSocketId(client, socket.id);
         socket.emit('allUnreadMsg', {
           message: UnreadMsg,

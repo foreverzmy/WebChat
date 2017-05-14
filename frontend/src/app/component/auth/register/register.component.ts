@@ -19,10 +19,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     email: null,
     password: null
   };
-  private register;
+  public register;
   constructor(
-    private authService: AuthService,
-    private router: Router,
+    public authService: AuthService,
+    public router: Router,
   ) { }
 
   ngOnInit() {

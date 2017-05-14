@@ -6,6 +6,7 @@ const GroupMessage = require('../controllers/group-message');
 module.exports = function (socket) {
   socket
     .on('sendMsg', async msg => {
+      console.log(msg)
       const {
         group,
         from,

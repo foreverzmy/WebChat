@@ -53,12 +53,12 @@ export class SearchService {
       .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
+  public extractData(res: Response) {
     const body = res.json();
     return body || {};
   }
 
-  private handleError(error: Response | any) {
+  public handleError(error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
     if (error instanceof Response) {

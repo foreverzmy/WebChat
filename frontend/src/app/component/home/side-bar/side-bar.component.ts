@@ -11,8 +11,8 @@ import { AuthService } from '../../../service/auth.service';
 })
 export class SideBarComponent implements OnInit, OnDestroy {
   constructor(
-    private socket: SocketService,
-    private authService: AuthService,
+    public socket: SocketService,
+    public authService: AuthService,
   ) { }
 
   ngOnInit() {

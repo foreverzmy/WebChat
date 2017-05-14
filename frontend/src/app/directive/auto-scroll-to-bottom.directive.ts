@@ -8,7 +8,7 @@ import { ElementRef } from '@angular/core';
 export class AutoScrollToBottomDirective implements AfterViewChecked {
 
   constructor(
-    private elem: ElementRef
+    public elem: ElementRef
   ) { }
 
   ngAfterViewChecked() {

@@ -13,17 +13,17 @@ import { ListService } from '../../../service/list.service';
   styleUrls: ['./buddy-list.component.scss']
 })
 export class BuddyListComponent implements OnInit, OnDestroy {
-  private room: string;
-  private type: any;
-  private sub: any;
-  private friendList: any[];
-  private groupList: any[];
+  public room: string;
+  public type: any;
+  public sub: any;
+  public friendList: any[];
+  public groupList: any[];
 
   constructor(
-    private _activitedRoute: ActivatedRoute,
-    private socket: SocketService,
-    private authService: AuthService,
-    private listService: ListService,
+    public _activitedRoute: ActivatedRoute,
+    public socket: SocketService,
+    public authService: AuthService,
+    public listService: ListService,
   ) { }
 
   ngOnInit() {

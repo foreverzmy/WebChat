@@ -10,12 +10,12 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  private loginState: boolean;
-  private auth: any;
+  public loginState: boolean;
+  public auth: any;
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    public authService: AuthService,
+    public router: Router
   ) { }
 
 

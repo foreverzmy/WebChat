@@ -20,16 +20,16 @@ export class ChatRoomComponent implements OnInit, OnChanges {
   @Input() type: string;
   @Output() lastSend;
 
-  private message: string;
-  private messageList = [];
-  private sendSub$;
-  private sendMsg$ = new Subject<any>();
+  public message: string;
+  public messageList = [];
+  public sendSub$;
+  public sendMsg$ = new Subject<any>();
 
   constructor(
-    private socket: SocketService,
-    private authService: AuthService,
-    private listService: ListService,
-    private elementRef: ElementRef,
+    public socket: SocketService,
+    public authService: AuthService,
+    public listService: ListService,
+    public elementRef: ElementRef,
   ) {
 
   }

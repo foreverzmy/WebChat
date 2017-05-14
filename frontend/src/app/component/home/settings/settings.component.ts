@@ -11,10 +11,10 @@ import { SearchService } from '../../../service/search.service';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  private msgs = [];
+  public msgs = [];
   constructor(
-    private socket: SocketService,
-    private searchService: SearchService,
+    public socket: SocketService,
+    public searchService: SearchService,
   ) {
   }
   ngOnInit() {

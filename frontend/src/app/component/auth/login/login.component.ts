@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     password: null
   };
   public returnUrl: string;
-  private getUser;
-  private loginConn;
+  public getUser;
+  public loginConn;
   public options = {
     position: ['top', 'right'],
     timeOut: 3000,
@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private activeRoute: ActivatedRoute,
+    public authService: AuthService,
+    public router: Router,
+    public activeRoute: ActivatedRoute,
   ) {
     this.activeRoute.queryParams.subscribe(params => {
       this.returnUrl = params['returnUrl'];

@@ -12,7 +12,7 @@ import { SocketService } from '../../service/socket.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private getAllMsg;
+  public getAllMsg;
   public options = {
     position: ['top', 'right'],
     timeOut: 3000,
@@ -20,9 +20,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private router: Router,
-    private socket: SocketService,
-    private notice: NotificationsService,
+    public router: Router,
+    public socket: SocketService,
+    public notice: NotificationsService,
   ) { }
 
   ngOnInit() {

@@ -11,18 +11,18 @@ import { ListService } from '../../../service/list.service';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnDestroy {
-  private name: string;
-  private range = 'all';
-  private userList = [];
-  private groupList = [];
-  private create = true;
-  private getUserListSub;
-  private addFriendSub;
-  private creatGroupSub;
+  public name: string;
+  public range = 'all';
+  public userList = [];
+  public groupList = [];
+  public create = true;
+  public getUserListSub;
+  public addFriendSub;
+  public creatGroupSub;
 
   constructor(
-    private searchService: SearchService,
-    private listService: ListService,
+    public searchService: SearchService,
+    public listService: ListService,
   ) {
 
   }

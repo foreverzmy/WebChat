@@ -4,9 +4,9 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class NoticeService {
 
-  private _messages: any;
+  public _messages: any;
 
-  private messagesSubject = new Subject<any>();
+  public messagesSubject = new Subject<any>();
   public messages = this.messagesSubject.asObservable();
 
   constructor() {
@@ -23,7 +23,7 @@ export class NoticeService {
     return this.messages.subscribe(fn);
   }
 
-  private guid() {
+  public guid() {
     function s4() {
       return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)
