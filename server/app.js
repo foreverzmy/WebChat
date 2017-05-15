@@ -1,6 +1,7 @@
 "use strict";
 const Koa = require('koa');
 const http = require('http');
+const socket = require('socket.io');
 const convert = require('koa-convert');
 const bodyparser = require('koa-bodyparser');
 // const session = require('koa-session');
@@ -20,6 +21,7 @@ const group = require('./lib/routes/group');
 
 const app = new Koa();
 const server = http.Server(app.callback());
+const io = socket(server);
 const router = new Router({
   prefix: '/api'
 });
@@ -57,4 +59,7 @@ router
   .use('/friend', friend.routes(), friend.allowedMethods())
   .use('/group', group.routes(), group.allowedMethods())
 
-module.exports = server;
+module.exports = {
+  server,
+  io
+};

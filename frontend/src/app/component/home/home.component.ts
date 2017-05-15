@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService, PushNotificationsService } from 'angular2-notifications';
 
 import { SocketService } from '../../service/socket.service';
 
@@ -23,9 +23,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     public router: Router,
     public socket: SocketService,
     public notice: NotificationsService,
+    public pushNotifications: PushNotificationsService
   ) { }
 
   ngOnInit() {
+    this.pushNotifications.requestPermission();
     this.showLoad();
     // 接收消息
     this.socket.on('sendMsg')
@@ -45,6 +47,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           // 将消息存入数组
           this.socket.messageList[msg.to].push(msg);
         }
+
+        this.showNesMessage(msg);
       },
       err => console.log(err),
     );
@@ -71,6 +75,26 @@ export class HomeComponent implements OnInit, OnDestroy {
         pauseOnHover: true,
         clickToClose: true,
         maxLength: 10
+      }
+    );
+  }
+
+  showNesMessage(msg) {
+    // this.pushNotifications.create('消息通知',
+    //   { body: `${msg.email}：${msg.content}` })
+    //   .subscribe(
+    //   res => console.log(res),
+    //   err => console.log(err)
+    //   );
+    this.notice.info(
+      '消息通知',
+      `${msg.email}：${msg.content}`,
+      {
+        timeOut: 3000,
+        showProgressBar: false,
+        pauseOnHover: true,
+        clickToClose: true,
+        maxLength: 30
       }
     );
   }

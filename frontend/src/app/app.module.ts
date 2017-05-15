@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './component/home/home.module';
 import { ServiceModule } from './service/service.module';
 import { AuthModule } from './component/auth/auth.module';
+import { PushNotificationsModule } from 'angular2-notifications';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({}), http, options);
@@ -26,6 +27,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     HttpModule,
     AppRoutingModule,
+    PushNotificationsModule,
     HomeModule,
     ServiceModule,
     AuthModule

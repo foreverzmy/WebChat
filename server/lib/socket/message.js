@@ -2,11 +2,13 @@ const User = require('../controllers/user');
 const Group = require('../controllers/group');
 const Message = require('../controllers/message');
 const GroupMessage = require('../controllers/group-message');
+const {
+  io
+} = require('../../app');
 
 module.exports = function (socket) {
   socket
     .on('sendMsg', async msg => {
-      console.log(msg)
       const {
         group,
         from,
@@ -23,7 +25,7 @@ module.exports = function (socket) {
 
         // 如果发送消息对象在线
         if (toSocketId !== null) {
-          this.io.sockets.connected[toSocketId].emit('sendMsg', msg);
+          io.sockets.connected[toSocketId].emit('sendMsg', msg);
         } else { // 如果不在线，则不发送
         }
       } else { //群组消息
@@ -38,7 +40,7 @@ module.exports = function (socket) {
           if (member != from) {
             const toSocketId = await User.findSocketId(member);
             if (toSocketId !== null) {
-              this.io.sockets.connected[toSocketId].emit('sendMsg', msg);
+              io.sockets.connected[toSocketId].emit('sendMsg', msg);
             } else { // 如果不在线，则不发送
             }
           }

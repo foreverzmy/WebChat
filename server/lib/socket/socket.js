@@ -2,13 +2,18 @@ const User = require('../controllers/user');
 const Message = require('../controllers/message');
 const GroupMessage = require('../controllers/group-message');
 const messageSocket = require('./message');
+const {
+  io
+} = require('../../app');
 
 module.exports = function () {
 
-  this.io.on('connection', socket => {
+  io.on('connection', socket => {
+    console.log('connection');
     socket
       // 监听用户退出事件
       .on('disconnect', () => {
+        console.log('disconnect');
         User.delSocketId(socket.id);
       })
       .on('getUnreadMsg', async client => {
@@ -17,7 +22,6 @@ module.exports = function () {
 
         const UnreadGroupMsg = await GroupMessage.findUnreadMsg(client);
 
-        console.log(client, socket.id)
         User.saveSocketId(client, socket.id);
         socket.emit('allUnreadMsg', {
           message: UnreadMsg,
