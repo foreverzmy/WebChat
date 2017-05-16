@@ -24,15 +24,15 @@ export class ChatRoomComponent implements OnInit, OnChanges {
   public messageList = [];
   public sendSub$;
   public sendMsg$ = new Subject<any>();
+  public emojis = ['😂', '😄', '😏', '😇', '😅', '😌', '😘', '😗', '😍', '😀', '😜', '😎', '😊', '😳', '😅', '😱', '😒', '😔', '😷', '😩', '😤', '😱', '😕', '😵', '😣', '😰', '😷', '😴', '😬', '😭', '👻', '👽', '👿', '😈', '👹', '👺', '💀', '💩', '👍', '✌️', '👉', '👀', '🐶', '🐷', '😹', '⚡️', '🔥', '🌈', '🍏', '⚽️', '❤️', '🙏', '🇨🇳'];
+  public showEmoji = false;
 
   constructor(
     public socket: SocketService,
     public authService: AuthService,
     public listService: ListService,
     public elementRef: ElementRef,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     // 初始化消息列表
@@ -59,7 +59,7 @@ export class ChatRoomComponent implements OnInit, OnChanges {
 
   sendMsg() {
     this.sendMsg$.map(
-      (e: any) => ({
+      () => ({
         group: this.type === 'group' ? true : false,
         from: this.authService.userInfo.id,
         to: this.room,
@@ -75,6 +75,12 @@ export class ChatRoomComponent implements OnInit, OnChanges {
         );
         this.socket.messageList[this.room].push(msg);
       });
+  }
+
+  sendEmoji(item) {
+    this.message = item;
+    this.sendMsg$.next();
+    this.showEmoji = false;
   }
 
   // 根据发送消息对象设置 class

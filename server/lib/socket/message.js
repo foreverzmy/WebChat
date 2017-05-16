@@ -14,7 +14,7 @@ module.exports = function (socket) {
         from,
         to
       } = msg;
-
+      console.log(msg.content)
       // 好友消息
       if (group === false) {
         const toSocketId = await User.findSocketId(to);

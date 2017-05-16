@@ -15,7 +15,13 @@
   </div>
 
   <div class="send" *ngIf='room'>
-    <input class="send-msg" type="text" [(ngModel)]='message' (keyup.enter)="sendMsg$.next($event)" placeholder="说点什么...">
+    <div class="emoji-board" *ngIf='showEmoji'>
+      <ul>
+        <li *ngFor='let item of emojis' (click)='sendEmoji(item)'>{{ item }}</li>
+      </ul>
+    </div>
+    <div class="emoji" (click)='showEmoji=!showEmoji'><i class="material-icons">insert_emoticon</i></div>
+    <input class="send-msg" type="text" [(ngModel)]='message' (keyup.enter)="sendMsg$.next()" placeholder="说点什么...">
   </div>
 
 </div>
