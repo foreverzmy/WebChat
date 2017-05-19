@@ -30,7 +30,7 @@
       display: block;
       text-align: center;
       font-size: 18px;
-      color: white;
+      color: #53e3a6;
       -webkit-transition-duration: 0.25s;
       transition-duration: 0.25s;
       font-weight: 300;
@@ -71,8 +71,9 @@
         float: left;
         font-weight: bold;
         margin: 0 5px;
+        background-color: #f5f7f9;
         &:hover {
-          background-color: #f5f7f9;
+          background-color: #53e3a6;
         }
       }
     }
