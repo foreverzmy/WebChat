@@ -1,8 +1,8 @@
 const Router = require('koa-router');
 const User = require('../controllers/user');
-const {
-  io
-} = require('../../app');
+// const {
+//   io
+// } = require('../../app');
 
 const router = new Router();
 
@@ -25,7 +25,8 @@ router.post('/', async(ctx, next) => {
       email: fromUser.email,
       id: fromUser._id,
     }
-    io.sockets.connected[toSocketId].emit('notice', message);
+
+    global.io.sockets.connected[toSocketId].emit('notice', message);
 
   } else { // 如果不在线，则把消息存入数据库
   }

@@ -22,6 +22,7 @@ const group = require('./lib/routes/group');
 const app = new Koa();
 const server = http.Server(app.callback());
 const io = socket(server);
+global.io = io;
 const router = new Router({
   prefix: '/api'
 });
