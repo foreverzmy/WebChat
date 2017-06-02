@@ -78,7 +78,6 @@ class User {
       savedUser = await newUser.save();
     } catch (err) {
       throw err;
-      return false;
     }
     return savedUser;
   }
@@ -120,7 +119,6 @@ User.saveSocketId = async function (id, socketId) {
     })
   } catch (err) {
     throw err;
-    return false;
   }
   return true;
 }
@@ -195,7 +193,6 @@ User.saveNewGroup = async function (id, groupId) {
     })
   } catch (err) {
     throw err;
-    return false
   }
   return true;
 }
@@ -207,7 +204,6 @@ User.findGroupId = async function (id) {
     groupList = await UserDB.findById(id, 'groups')
   } catch (err) {
     throw err;
-    return false;
   }
   return groupList.groups;
 }
@@ -224,7 +220,6 @@ User.findGroup = async function (id) {
     }, ['_id', 'name']);
   } catch (err) {
     throw err;
-    return false;
   }
   return groupList;
 }
